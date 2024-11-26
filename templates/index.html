@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMAZONAS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #232F3E;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header a, .header input {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            color: #000;
+            background-color: #fff;
+        }
+
+        .search-bar input::placeholder {
+            color: #888;
+            font-style: italic;
+        }
+
+        .search-bar button {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .product-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: calc(25% - 20px);
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .product-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .product-card p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .product-card button {
+            background-color: #FF9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .footer {
+            background-color: #232F3E;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #noResultsMessage {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+            display: none; /* Oculto inicialmente */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="{% url 'index' %}" class="logo">Amazonas</a>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Buscar productos">
+            <button id="searchButton">Buscar</button>
+        </div>
+        <div class="user-section">
+            <div class="cart">
+                <img src="imagenes/carrito.png" alt="Carrito" width="30" height="30">
+                <a href="{% url 'carrito' %}" style="font-size: 15px; color: white; margin-left: 5px;">Carrito</a>
+            </div>
+            <div class="login">
+                <img src="imagenes/ic.png" alt="Inicio de sesión" width="30" height="30">
+                <a href="{% url 'inicio' %}" style="font-size: 15px; color: white; margin-left: 5px;">Inicio de Sesión</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content">
+        <h2>Productos</h2>
+        <div class="product-section">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Producto 1">
+                <h3>Producto 1</h3>
+                <p>$100.00</p>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Producto 2">
+                <h3>Producto 2</h3>
+                <p>$200.00</p>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Producto 3">
+                <h3>Producto 3</h3>
+                <p>$300.00</p>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150" alt="Producto 4">
+                <h3>Producto 4</h3>
+                <p>$400.00</p>
+            </div>
+        </div>
+        <p id="noResultsMessage">No se encontraron productos.</p>
+    </div>
+
+    <div class="footer">
+        <p>© 2024 Amazonas. Todos los derechos reservados.</p>
+    </div>
+
+    <script>
+        const searchButton = document.getElementById('searchButton');
+        const searchInput = document.getElementById('searchInput');
+        const productCards = document.querySelectorAll('.product-card');
+        const noResultsMessage = document.getElementById('noResultsMessage');
+
+        function searchProducts() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            let found = false;
+
+            productCards.forEach(card => {
+                const productName = card.querySelector('h3').textContent.toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    card.style.display = 'block'; // Mostrar si coincide
+                    found = true;
+                } else {
+                    card.style.display = 'none'; // Ocultar si no coincide
+                }
+            });
+
+            // Mostrar mensaje si no se encontraron productos
+            noResultsMessage.style.display = found ? 'none' : 'block';
+        }
+
+        searchButton.addEventListener('click', searchProducts);
+        searchInput.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                searchProducts();
+            }
+        });
+    </script>
+</body>
+</html>

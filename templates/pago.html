@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método de Pago</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            background-color: #232F3E;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .total {
+            font-size: 18px;
+            margin: 20px 0;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .pay-button {
+            background-color: #FF9900;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .pay-button:hover {
+            background-color: #cc7a00;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/">AMAZONAS</a>
+    </div>
+
+    <div class="container">
+        <h2>Método de Pago</h2>
+
+        <div class="total">
+            Total a pagar: <span id="total">$320.00</span>
+        </div>
+
+        <form id="payment-form">
+            <div class="form-group">
+                <label for="card-name">Nombre en la tarjeta</label>
+                <input type="text" id="card-name" placeholder="Nombre completo" required>
+            </div>
+            <div class="form-group">
+                <label for="card-number">Número de tarjeta</label>
+                <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="16" required>
+            </div>
+            <div class="form-group">
+                <label for="expiry-date">Fecha de vencimiento</label>
+                <input type="date" id="expiry-date" required>
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="number" id="cvv" placeholder="123" maxlength="3" required>
+            </div>
+            <button type="button" class="pay-button" onclick="procesarPago()">Pagar</button>
+        </form>
+    </div>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+        // Simulación de total desde un carrito anterior
+        const total = 320.00; 
+        document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+
+        function procesarPago() {
+            const nombre = document.getElementById('card-name').value;
+            const numeroTarjeta = document.getElementById('card-number').value;
+            const fechaVencimiento = document.getElementById('expiry-date').value;
+            const cvv = document.getElementById('cvv').value;
+
+            // Validar que los campos estén llenos
+            if (!nombre || !numeroTarjeta || !fechaVencimiento || !cvv) {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+
+            
+            // Simulación de pago procesado
+            alert(`Pago procesado exitosamente por $${total.toFixed(2)}. ¡Gracias por tu compra!`);
+        }      
+    </script>
+
+    
+</body>
+</html>
