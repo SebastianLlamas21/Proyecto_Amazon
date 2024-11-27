@@ -62,6 +62,7 @@
 
         .content {
             padding: 20px;
+            flex: 1; 
         }
 
         .product-section {
@@ -105,6 +106,12 @@
             border-radius: 5px;
         }
 
+        .page-container {
+        display: flex;          
+        flex-direction: column;  
+        min-height: 100vh;       
+        }
+
         .footer {
             background-color: #232F3E;
             color: white;
@@ -119,57 +126,60 @@
             color: #555;
             display: none; /* Oculto inicialmente */
         }
+
+        .product-section {
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh; 
+        margin: 0 auto; 
+        }
     </style>
 </head>
 <body>
+    {% load static %}
     <div class="header">
         <a href="{% url 'index' %}" class="logo">Amazonas</a>
+        <a href="{% url 'index' %}" class="logo">
+            <img src="{% static 'imagenes/Alogo.png' %}" alt="Carrito" width="60" height="60">
+        </a>
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Buscar productos">
             <button id="searchButton">Buscar</button>
         </div>
         <div class="user-section">
             <div class="cart">
-                <img src="imagenes/carrito.png" alt="Carrito" width="30" height="30">
+                <img src="{% static 'imagenes/carrito.png' %}" alt="Carrito" width="30" height="30">
                 <a href="{% url 'carrito' %}" style="font-size: 15px; color: white; margin-left: 5px;">Carrito</a>
             </div>
             <div class="login">
-                <img src="imagenes/ic.png" alt="Inicio de sesión" width="30" height="30">
+                <img src="{% static 'imagenes/ic.png' %}" alt="Inicio de sesión" width="30" height="30">
                 <a href="{% url 'inicio' %}" style="font-size: 15px; color: white; margin-left: 5px;">Inicio de Sesión</a>
             </div>
         </div>
     </div>
     
     <div class="content">
-        <h2>Productos</h2>
-        <div class="product-section">
-            <div class="product-card">
-                <img src="https://via.placeholder.com/150" alt="Producto 1">
-                <h3>Producto 1</h3>
-                <p>$100.00</p>
+        <h2 >Productos</h2>
+            <div class="product-section">
+                {% for producto in productos %}
+                    <div class="product-card">
+                        <h2>{{ producto.name }}</h2>
+                        <p>Precio: ${{ producto.price }}</p>
+                        <div class="images">
+                            {% for image in producto.images %}
+                                <img src="{{ image }}" alt="{{ producto.name }}">
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No hay productos disponibles.</p>
+                {% endfor %}
             </div>
-            <div class="product-card">
-                <img src="https://via.placeholder.com/150" alt="Producto 2">
-                <h3>Producto 2</h3>
-                <p>$200.00</p>
-            </div>
-            <div class="product-card">
-                <img src="https://via.placeholder.com/150" alt="Producto 3">
-                <h3>Producto 3</h3>
-                <p>$300.00</p>
-            </div>
-            <div class="product-card">
-                <img src="https://via.placeholder.com/150" alt="Producto 4">
-                <h3>Producto 4</h3>
-                <p>$400.00</p>
-            </div>
-        </div>
         <p id="noResultsMessage">No se encontraron productos.</p>
     </div>
 
-    <div class="footer">
-        <p>© 2024 Amazonas. Todos los derechos reservados.</p>
-    </div>
+   
 
     <script>
         const searchButton = document.getElementById('searchButton');
@@ -202,5 +212,9 @@
             }
         });
     </script>
+
+    <div class="footer">
+        <p>© 2024 Amazonas. Todos los derechos reservados.</p>
+    </div>
 </body>
 </html>
