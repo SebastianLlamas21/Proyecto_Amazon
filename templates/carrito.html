@@ -1,143 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de Compras</title>
-    <style>
-        /* Estilos básicos para la página */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Encabezado */
-        .header {
-            background-color: #232F3E;
-            color: white;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .header a {
-            color: white;
-            text-decoration: none;
-            margin-right: 15px;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        /* Barra de búsqueda */
-        .search-bar {
-            display: flex;
-            align-items: center;
-        }
-        .search-bar input {
-            padding: 10px;
-            font-size: 16px;
-            width: 300px;
-            border: 1px solid #ccc;
-            border-radius: 5px 0 0 5px;
-            color: #000;
-            background-color: #fff;
-        }
-        .search-bar button {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            background-color: #007BFF;
-            color: white;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-        }
-        .search-bar button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Contenido principal */
-        .content {
-            padding: 20px;
-        }
-        .cart {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .cart-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-        }
-        .cart-item.hidden {
-            display: none; /* Ocultar elementos que no coincidan */
-        }
-        .cart-item img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            margin-right: 15px;
-        }
-        .cart-item-details {
-            flex-grow: 1;
-        }
-        .cart-item-details h3 {
-            margin: 0;
-            font-size: 18px;
-        }
-        .cart-item-details p {
-            margin: 5px 0;
-            color: #555;
-        }
-        .quantity {
-            margin-right: 15px;
-        }
-        .remove-item {
-            color: #FF9900;
-            cursor: pointer;
-            text-decoration: underline;
-        }
-
-        /* Resumen de compra */
-        .summary {
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-top: 20px;
-            text-align: right;
-        }
-        .summary h3 {
-            font-size: 20px;
-            margin: 0;
-        }
-        .summary p {
-            font-size: 16px;
-            margin: 10px 0;
-        }
-        .checkout-button {
-            background-color: #FF9900;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <!-- Encabezado -->
+
     <div class="header">
         <a href="{% url 'index' %}" class="logo">AMAZONAS</a>
+        <a href="{% url 'index' %}" class="logo">
+            <img src="{% static 'imagenes/Alogo.png' %}" alt="Carrito" width="60" height="60">
+        </a>
         <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Buscar productos">
-            <button id="searchButton">Buscar</button>
+            <form action="{% url 'buscar' %}" method="get" class="search-bar">
+                <input type="text" id="searchInput" name="q" placeholder="Buscar productos">
+                <button type="submit" id="searchButton">Buscar</button>
+            </form>
         </div>
     </div>
 

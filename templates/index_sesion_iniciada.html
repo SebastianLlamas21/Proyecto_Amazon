@@ -29,17 +29,12 @@
                 <a href="{% url 'carrito' %}" style="font-size: 15px; color: white; margin-left: 5px;">Carrito</a>
             </div>
 
-            {% if user.is_authenticated %}
+            
                 <div class="greeting">
-                    <p style="color: white; font-size: 15px; margin-left: 5px;">¡Hola, {{ user.username }}!</p>
-                    <a href="{% url 'logout' %}" style="font-size: 15px; color: white; margin-left: 5px;">Cerrar sesión</a>
+                    <p style="color: white; font-size: 15px; margin-left: 5px;">¡Hola, {{ user.Name }}!</p>
+                    <a href="{% url 'index' %}" style="font-size: 15px; color: white; margin-left: 5px;">Cerrar sesión</a>
                 </div>
-            {% else %}
-                <div class="login">
-                    <img src="{% static 'imagenes/ic.png' %}" alt="Inicio de sesión" width="30" height="30">
-                    <a href="{% url 'inicio' %}" style="font-size: 15px; color: white; margin-left: 5px;">Inicio de Sesión</a>
-                </div>
-            {% endif %}
+            
         </div>
     </div>
     
@@ -94,4 +89,3 @@
     </div>
 </body>
 </html>
-

@@ -1,0 +1,393 @@
+/*Estilos del cuerpo de pagina*/
+html, body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.header {
+    background-color: #232F3E;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header a, .header input {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+}
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+.content {
+    flex: 1; 
+    padding: 20px;
+}
+.footer {
+    background-color: #232F3E;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    margin-top: auto; 
+}
+h2 {
+    color: #333;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/*Estilos de barra de busqueda*/
+.search-bar input {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    color: #000;
+    background-color: #fff;
+}
+.search-bar input::placeholder {
+    color: #888;
+    font-style: italic;
+}
+.search-bar button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+.search-bar button:hover {
+    background-color: #0056b3;
+}
+
+
+/*Estilos de tarjetas de productos*/
+.product-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: calc(25% - 20px);
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+.product-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+.product-card p {
+    font-size: 16px;
+    color: #555;
+}
+.product-card button {
+    background-color: #FF9900;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.page-container {
+    display: flex;          
+    flex-direction: column;  
+    min-height: 100vh;       
+}
+.product-section {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    margin: 0 auto; 
+}
+
+
+/*Estilos de los mensajes*/
+.messages {
+    margin: 20px;
+}
+#noResultsMessage {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+    display: none;
+}
+.message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.message.success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.message.info {
+    background-color: #d1ecf1;
+    border: 1px solid #bee5eb;
+    color: #0c5460;
+}
+
+
+/*Estilos del carrusel*/
+.custom-carousel-btn {
+    width: 25px; 
+    height: 25px; 
+}
+.small-icon {
+    width: 15px; 
+    height: 15px;
+    background-size: 15px 15px;
+}
+.carousel-control-prev,
+.carousel-control-next {
+    top: 50%; 
+    transform: translateY(-50%);
+}
+
+
+
+.cart {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+.cart-item.hidden {
+    display: none; 
+}
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+.cart-item-details {
+    flex-grow: 1;
+}
+.cart-item-details h3 {
+    margin: 0;
+    font-size: 18px;
+}
+.cart-item-details p {
+    margin: 5px 0;
+    color: #555;
+}
+.quantity {
+    margin-right: 15px;
+}
+.remove-item {
+    color: #FF9900;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.summary {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: right;
+}
+.summary h3 {
+    font-size: 20px;
+    margin: 0;
+}
+.summary p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+.checkout-button {
+    background-color: #FF9900;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+
+/*Estilos del login*/
+.login-container {
+    max-width: 350px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+.login-container h2 {
+    font-size: 24px;
+    font-weight: normal;
+    color: #111;
+    margin-bottom: 20px;
+}
+.login-container label {
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+    color: #111;
+}
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #a6a6a6;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #FF9900;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.login-container button:hover {
+    background-color: #e68a00;
+}
+
+
+/*Estilos de boton de pago*/
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.total {
+    font-size: 18px;
+    margin: 20px 0;
+    text-align: right;
+    font-weight: bold;
+}
+
+.pay-button {
+    background-color: #FF9900;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.pay-button:hover {
+    background-color: #cc7a00;
+}
+
+
+/*Estilos de registro*/
+.register-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+.register-container h2 {
+    text-align: center;
+    color: #232F3E;
+    margin-bottom: 20px;
+}
+.register-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #232F3E;
+}
+.register-container input[type="text"],
+.register-container input[type="email"],
+.register-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.register-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #FF9900;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.register-container button:hover {
+    background-color: #cc7a00;
+}

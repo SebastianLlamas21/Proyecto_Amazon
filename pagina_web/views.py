@@ -5,6 +5,8 @@ from pymongo import MongoClient
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib import messages
+from bson import ObjectId
+import bcrypt
 
 #Vista Index
 
@@ -52,8 +54,8 @@ def inicio(request):
         try:
             # Conexión a MongoDB
             client = MongoClient('localhost', 27017)
-            db = client['Amazonas']  # Asegúrate de que tu base de datos se llama 'Amazonas'
-            collection = db['Usuarios']  # Asegúrate de que la colección se llama 'Usuarios'
+            db = client['Amazonas']  
+            collection = db['usuarios']  
 
             # Buscar el usuario por email
             usuario = collection.find_one({"Email": email})
@@ -61,9 +63,16 @@ def inicio(request):
             if usuario:
                 # Verificar que la contraseña también coincida
                 if usuario['Password'] == password:
-                    # Contraseña correcta
-                    messages.success(request, "Inicio de sesión exitoso")
-                    return redirect('index')  # Redirige al inicio si el login es exitoso
+                    # Verificar que el atributo 'Sesion' sea False
+                    if usuario.get('Sesion', False) == False:
+                        # Cambiar el valor de 'Sesion' a True
+                        collection.update_one({"_id": usuario['_id']}, {"$set": {"Sesion": True}})
+
+                        # Contraseña correcta y sesión iniciada
+                        messages.success(request, "Inicio de sesión exitoso")
+                        return redirect('sesion_iniciada')  # Redirige a la página 'index_sesion_iniciada'
+                    else:
+                        messages.error(request, "La sesión ya está iniciada")
                 else:
                     # Contraseña incorrecta
                     messages.error(request, "Contraseña incorrecta")
@@ -84,7 +93,83 @@ def inicio(request):
 def pago(request):
 	return render(request, "pago.html") 
 
+#Vista Pago
+def sesion_iniciada(request):
+	return render(request, "index_sesion_iniciada.html") 
 
 #Registro
 def registro(request):
-	return render(request, "registro.html") 
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        password = request.POST['password']
+        confirm_password = request.POST['confirm_password']
+        
+        # Validar que las contraseñas coinciden
+        if password != confirm_password:
+            messages.error(request, "Las contraseñas no coinciden")
+            return redirect('registro')
+        try:
+            # Verificar si el correo ya está registrado
+            client = MongoClient('mongodb://localhost:27017/')
+            db = client['Amazonas']
+            usuarios = db['usuarios']
+            
+            existing_user = usuarios.find_one({"Email": email})
+            if existing_user:
+                messages.error(request, "Este correo ya está registrado")
+                return redirect('registro')
+            
+            # Hash de la contraseña para seguridad
+            hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+            # Insertar el nuevo usuario en la base de datos
+            usuarios.insert_one({
+                'Name': name,
+                'Email': email,
+                'Password': password,
+                'Sesion': False
+            })
+            print({
+                'nombre': name,
+                'email': email,
+                'password': password
+            })
+
+            # Mensaje de éxito
+            messages.success(request, "Registro exitoso! Ahora puedes iniciar sesión.")
+            return redirect('inicio')
+        except ConnectionError as e:
+            messages.error(request, "Error al conectar con la base de datos.")
+            return redirect('registro')
+        
+    return render(request, 'registro.html')
+
+#Buscar productos
+def buscar_productos(request):
+    termino = request.GET.get('q', '')  # Obtener el término de búsqueda desde los parámetros GET
+    productos = []
+
+    if termino:  # Verificar que el término no esté vacío
+        try:
+            # Conectar a la base de datos MongoDB
+            client = MongoClient('localhost', 27017)
+            database = client['Amazonas']
+            collection = database['Productos']
+
+            # Buscar productos cuyo nombre coincida parcialmente (insensible a mayúsculas)
+            resultados = collection.find({"name": {"$regex": termino, "$options": "i"}})
+
+            # Convertir los resultados a una lista de diccionarios
+            productos = [
+                {"name": producto["name"], "price": producto["price"], "images": producto["images"]}
+                for producto in resultados
+            ]
+
+            client.close()  # Cerrar conexión con la base de datos
+        except Exception as ex:
+            # Si ocurre un error, puedes agregar manejo de errores aquí
+            print(f"Error al buscar productos: {ex}")
+
+    # Renderizar los resultados en el template
+    return render(request, 'busqueda.html', {"productos": productos, "termino": termino})
