@@ -1,0 +1,81 @@
+<!DOCTYPE html> 
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMAZONAS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://images-na.ssl-images-amazon.com/images/I/41KnntLBZGL._RC|71QrWIE9zvL.css,51bNVko77xL.css,21-GKunH78L.css,21Hc1s0-E4L.css,31YZpDCYJPL.css,21DwGGPS1eL.css,41EtvNY2OrL.css,110Nj+wUGYL.css,11d9j7YfN-L.css,01H8CHB5aiL.css,21KQnzhmfTL.css,415g7iDx4VL.css_.css?AUIClients/NavDesktopUberAsset#desktop.1032093-T1.878681-T1.1089549-T1.1016514-T1.949239-T1.1088933-T1.1102424-T1" />
+    <style>
+        .search-bar input {
+        padding: 10px;
+        font-size: 16px;
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px 0 0 5px;
+        color: #000;
+        background-color: #fff;
+        flex-grow: 1; /* Permite que el input ocupe el espacio disponible */
+        border-radius: 5px 0 0 5px;
+        }
+        .search-bar input::placeholder {
+            color: #888;
+            font-style: italic;
+        }
+        .search-bar button {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0; /* El borde redondeado afecta solo el lado derecho */
+            margin: 0; 
+        }
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+        .search-bar {
+            display: flex; /* Alinea los hijos (input y button) en una fila */
+            align-items: center; /* Centra verticalmente los elementos si son de diferentes tamaños */
+            gap: 0; /* Quita cualquier espacio entre el input y el botón */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="{% url 'index' %}" class="logo">Amazonas</a>
+        <a href="{% url 'index' %}" class="logo">
+            <img src="{% static 'imagenes/Alogo.png' %}" alt="Carrito" width="60" height="60">
+        </a>
+        
+        <div class="search-bar">
+            <form action="{% url 'buscar' %}" method="get" class="search-bar">
+                <input type="text" id="searchInput" name="q" placeholder="Buscar en Amazonas">
+                <button type="submit" id="searchButton">Buscar</button>
+            </form>
+        </div>
+        
+
+        <div class="user-section">
+            <div class="cart">
+                <img src="{% static 'imagenes/carrito.png' %}" alt="Carrito" width="30" height="30">
+                <a href="{% url 'carrito' %}" style="font-size: 15px; color: white; margin-left: 5px;">Carrito</a>
+            </div>
+
+            {% if user.is_authenticated %}
+                <div class="greeting">
+                    <p style="color: white; font-size: 15px; margin-left: 5px;">¡Hola, {{ user.username }}!</p>
+                    <a href="{% url 'logout' %}" style="font-size: 15px; color: white; margin-left: 5px;">Cerrar sesión</a>
+                </div>
+            {% else %}
+                <div class="login">
+                    <img src="{% static 'imagenes/ic.png' %}" alt="Inicio de sesión" width="30" height="30">
+                    <a href="{% url 'inicio' %}" style="font-size: 15px; color: white; margin-left: 5px;">Inicio de Sesión</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>

@@ -9,14 +9,7 @@ body {
     display: flex;
     flex-direction: column;
 }
-.header {
-    background-color: #232F3E;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+
 
 .header a, .header input {
     color: white;
@@ -51,6 +44,7 @@ label {
     font-weight: bold;
 }
 
+
 /*Estilos de barra de busqueda*/
 .search-bar input {
     padding: 10px;
@@ -60,6 +54,8 @@ label {
     border-radius: 5px 0 0 5px;
     color: #000;
     background-color: #fff;
+    flex-grow: 1; /* Permite que el input ocupe el espacio disponible */
+    border-radius: 5px 0 0 5px;
 }
 .search-bar input::placeholder {
     color: #888;
@@ -73,9 +69,16 @@ label {
     color: white;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
+    border-radius: 0 5px 5px 0; /* El borde redondeado afecta solo el lado derecho */
+    margin: 0; 
 }
 .search-bar button:hover {
     background-color: #0056b3;
+}
+.search-bar {
+    display: flex; /* Alinea los hijos (input y button) en una fila */
+    align-items: center; /* Centra verticalmente los elementos si son de diferentes tamaños */
+    gap: 0; /* Quita cualquier espacio entre el input y el botón */
 }
 
 

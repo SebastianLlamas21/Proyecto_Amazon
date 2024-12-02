@@ -1,27 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-{% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito de Compras</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-
-    <div class="header">
-        <a href="{% url 'index' %}" class="logo">AMAZONAS</a>
-        <a href="{% url 'index' %}" class="logo">
-            <img src="{% static 'imagenes/Alogo.png' %}" alt="Carrito" width="60" height="60">
-        </a>
-        <div class="search-bar">
-            <form action="{% url 'buscar' %}" method="get" class="search-bar">
-                <input type="text" id="searchInput" name="q" placeholder="Buscar productos">
-                <button type="submit" id="searchButton">Buscar</button>
-            </form>
-        </div>
-    </div>
-
+{% include 'header.html' %}
     <!-- Contenido principal -->
     <div class="content">
         <h2>Carrito de Compras</h2>
