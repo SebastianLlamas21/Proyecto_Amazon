@@ -9,7 +9,14 @@ body {
     display: flex;
     flex-direction: column;
 }
-
+.header {
+    background-color: #232F3E;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 .header a, .header input {
     color: white;
@@ -80,7 +87,6 @@ label {
     align-items: center; /* Centra verticalmente los elementos si son de diferentes tamaños */
     gap: 0; /* Quita cualquier espacio entre el input y el botón */
 }
-
 
 /*Estilos de tarjetas de productos*/
 .product-section {

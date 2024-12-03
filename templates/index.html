@@ -15,40 +15,44 @@
     <h2>Productos</h2>
     <div class="product-section">
         {% for producto in productos %}
-            <div class="product-card">
-                <h2>{{ producto.name }}</h2>
-                <p>Precio: ${{ producto.price }}</p>
-                
-                <!-- Carrusel de imágenes -->
-                <div id="carousel-{{ forloop.counter }}" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        {% for image in producto.images %}
-                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                <img src="{{ image }}" class="d-block" alt="{{ producto.name }}" style="width: 300px; height: 300px; object-fit: cover; display: block; margin: 0 auto;">
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <button class="carousel-control-prev custom-carousel-btn" type="button" data-bs-target="#carousel-{{ forloop.counter }}" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon small-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next custom-carousel-btn" type="button" data-bs-target="#carousel-{{ forloop.counter }}" data-bs-slide="next">
-                        <span class="carousel-control-next-icon small-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Siguiente</span>
-                    </button>
+        <div class="product-card">
+            <h2>{{ producto.name }}</h2>
+            <p>Precio: ${{ producto.price }}</p>
+            
+            <!-- Carrusel de imágenes -->
+            <div id="carousel-{{ forloop.counter }}" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for image in producto.images %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{ image }}" class="d-block" alt="{{ producto.name }}" style="width: 300px; height: 300px; object-fit: cover; display: block; margin: 0 auto;">
+                        </div>
+                    {% endfor %}
                 </div>
-                <!-- Fin del carrusel -->
-                    
+                <button class="carousel-control-prev custom-carousel-btn" type="button" data-bs-target="#carousel-{{ forloop.counter }}" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon small-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next custom-carousel-btn" type="button" data-bs-target="#carousel-{{ forloop.counter }}" data-bs-slide="next">
+                    <span class="carousel-control-next-icon small-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
             </div>
-            {% empty %}
-                <p>No hay productos disponibles.</p>
-            {% endfor %}
+            <!-- Fin del carrusel -->
+
+            <!-- Botón de agregar al carrito -->
+            <form action="{% url 'agregar_al_carrito' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="producto_id" value="{{ producto.id }}">
+                <button type="submit" class="btn btn-primary">Agregar al carrito</button>
+            </form>
         </div>
+    {% empty %}
+        <p>No hay productos disponibles.</p>
+    {% endfor %}
+    </div>
         <p id="noResultsMessage">No se encontraron productos.</p>
     </div>
-    <div class="footer">
-        <p>© 2024 Amazonas. Todos los derechos reservados.</p>
-    </div>
-</body>
-</html>
+</div>
+    
+{% include 'footer.html' %}
 

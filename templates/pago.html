@@ -1,27 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-{% load static %}
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Método de Pago</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
-
-</head>
-<body>
-    <div class="header">
-        <a href="{% url 'index' %}">AMAZONAS</a>
-    </div>
+{% include 'header_simple.html' %}
 
     <div class="container">
         <h2>Método de Pago</h2>
-
+    
+        <!-- Mostrar el total de pago recibido desde la vista -->
         <div class="total">
-            Total a pagar: <span id="total">$320.00</span>
+            Total a pagar: <span id="total">${{ total_pago|floatformat:2 }}</span>
         </div>
-
+    
         <form id="payment-form">
             <div class="form-group">
                 <label for="card-name">Nombre en la tarjeta</label>
@@ -42,32 +28,6 @@
             <button type="button" class="pay-button" onclick="procesarPago()">Pagar</button>
         </form>
     </div>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
-        // Simulación de total desde un carrito anterior
-        const total = 320.00; 
-        document.getElementById('total').textContent = `$${total.toFixed(2)}`;
-
-        function procesarPago() {
-            const nombre = document.getElementById('card-name').value;
-            const numeroTarjeta = document.getElementById('card-number').value;
-            const fechaVencimiento = document.getElementById('expiry-date').value;
-            const cvv = document.getElementById('cvv').value;
-
-            // Validar que los campos estén llenos
-            if (!nombre || !numeroTarjeta || !fechaVencimiento || !cvv) {
-                alert("Por favor, completa todos los campos.");
-                return;
-            }
-
-            
-            // Simulación de pago procesado
-            alert(`Pago procesado exitosamente por $${total.toFixed(2)}. ¡Gracias por tu compra!`);
-        }      
-    </script>
-
-    
+       
 </body>
 </html>

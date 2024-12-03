@@ -43,6 +43,15 @@
             align-items: center; /* Centra verticalmente los elementos si son de diferentes tamaños */
             gap: 0; /* Quita cualquier espacio entre el input y el botón */
         }
+        .header {
+            background-color: #232F3E;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
     </style>
 </head>
 <body>
@@ -69,12 +78,12 @@
             {% if user.is_authenticated %}
                 <div class="greeting">
                     <p style="color: white; font-size: 15px; margin-left: 5px;">¡Hola, {{ user.username }}!</p>
-                    <a href="{% url 'logout' %}" style="font-size: 15px; color: white; margin-left: 5px;">Cerrar sesión</a>
+                    <a href="{% url 'logout' %}" class="logout-button" style="font-size: 15px; color: white; margin-left: 5px;">Cerrar sesión</a>
                 </div>
             {% else %}
                 <div class="login">
                     <img src="{% static 'imagenes/ic.png' %}" alt="Inicio de sesión" width="30" height="30">
-                    <a href="{% url 'inicio' %}" style="font-size: 15px; color: white; margin-left: 5px;">Inicio de Sesión</a>
+                    <a href="{% url 'inicio' %}" style="font-size: 15px; color: white; margin-left: 5px;">Iniciar Sesión</a>
                 </div>
             {% endif %}
         </div>

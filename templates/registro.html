@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-{% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazonas - Registro</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    <div class="header">
-        <a href="{% url 'index' %}" class="logo">Amazonas</a>
-    </div>
+{% include 'header_simple.html' %}
 
     {% if messages %}
         <div class="messages">

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMAZONAS</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        .header {
+            background-color: #232F3E;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="{% url 'index' %}" class="logo">Amazonas</a>
+        <a href="{% url 'index' %}" class="logo">
+            <img src="{% static 'imagenes/Alogo.png' %}" alt="Carrito" width="60" height="60">
+        </a>    
+    </div>
