@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Mis Pedidos{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Mis Pedidos</h2>
+
+    {% if pagos %}
+        <div class="order-list">
+            {% for pago in pagos %}
+            <div class="order-item">
+                <h4>Pedido ID: {{ pago.pedido_id }}</h4>  <!-- Usamos pedido.pedido_id en lugar de pago._id -->
+                <p><strong>Fecha:</strong> {{ pago.fecha }}</p>
+                <p><strong>Estado:</strong> {{ pago.estado|default:"No especificado" }}</p>
+                <p><strong>Total:</strong> ${{ pago.monto|floatformat:2 }}</p>
+                
+                <!-- Mostrar fecha estimada de envío -->
+                <p><strong>Fecha Estimada de Envío:</strong> {{ pago.fecha_envio }}</p>
+
+                <h5>Productos Comprados:</h5>
+                <div class="cart">
+                    {% for producto in pago.productos %}
+                    <div class="cart-item">
+                        <!-- Imagen del Producto -->
+                        <img src="{{ producto.images|first|default:'https://via.placeholder.com/80' }}" alt="{{ producto.name }}" style="width: 80px; height: 80px; object-fit: cover;">
+                        
+                        <div class="cart-item-details">
+                            <h3>{{ producto.name }}</h3>
+                            <p>Precio: ${{ producto.price|floatformat:2 }}</p>
+                            <p>Cantidad: {{ producto.cantidad }}</p>
+                        </div>
+
+                      
+                    {% endfor %}
+                </div>
+
+                <hr>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No tienes pedidos recientes.</p>
+    {% endif %}
+</div>
+{% endblock %}

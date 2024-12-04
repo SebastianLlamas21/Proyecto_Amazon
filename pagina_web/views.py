@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from bson import ObjectId
+from datetime import datetime, timedelta
 
 
 client = MongoClient('localhost', 27017)
@@ -384,36 +385,6 @@ def actualizar_carrito(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#Vista para pedidos
-@login_required
-def orders_view(request):
-    """Muestra los pedidos del usuario."""
-    user_id = request.user.id
-    user_data = get_user_data(user_id)
-    return render(request, 'orders.html', {'orders': user_data['orders']})
-
-
 #Vista Pago
 def pago(request):
     total = request.GET.get('total', 0)  # Recibir el valor total desde el carrito (GET)
@@ -426,28 +397,151 @@ def pago(request):
     return render(request, "pago.html", {"total_pago": total})
 
 
+#Vista para procesar el pago
+
+
+def procesar_pago(request):
+    if request.method == 'POST':
+        # Obtener el ID del usuario
+        user_id = str(request.user.id) if request.user.is_authenticated else None
+        nombre_tarjeta = request.POST.get('card_name')
+        numero_tarjeta = request.POST.get('card_number')  # Este dato no debe almacenarse en texto claro, solo para validaciones
+        monto = float(request.POST.get('monto', 0))
+        metodo_pago = "Tarjeta"  # Por ejemplo, puedes cambiarlo por otros métodos (ej: PayPal, transferencia)
+
+        try:
+            # Conectar a MongoDB
+            client = MongoClient('localhost', 27017)
+            db = client["Amazonas"]
+            carritos_collection = db["Carritos"]
+            pagos_collection = db["Pagos"]
+
+            # Obtener el carrito del usuario
+            carrito = carritos_collection.find_one({"user_id": user_id})
+            
+            if not carrito or not carrito.get("productos"):
+                messages.error(request, "Tu carrito está vacío. No se puede procesar el pago.")
+                return redirect("carrito")
+
+            productos = carrito["productos"]
+
+            # Registrar el pago en la colección "Pagos"
+            pago = {
+                "user_id": user_id,
+                "monto": monto,
+                "productos": productos,
+                "fecha": datetime.now(),  # Fecha actual cuando se realiza el pago
+                "metodo_pago": metodo_pago
+            }
+
+            # Insertar el pago en la base de datos
+            pago_id = pagos_collection.insert_one(pago).inserted_id
+
+            # Limpiar el carrito después del pago
+            carritos_collection.update_one(
+                {"user_id": user_id},
+                {"$set": {"productos": []}}  # Vaciar el carrito
+            )
+
+            messages.success(request, "Pago procesado correctamente.")
+            return redirect("confirmacion_pago", pago_id=pago_id)  # Redirigir a una página de confirmación de pago
+
+        except Exception as e:
+            # Manejar el error y redirigir al usuario con un mensaje
+            messages.error(request, f"Hubo un error al procesar el pago: {str(e)}")
+            return redirect("carrito") 
+
+        finally:
+            client.close()
+
+    return render(request, "pago.html")
 
 
 
+#Vista de confirmacion del pago
+def confirmacion_pago(request, pago_id):
+    try:
+        # Conectar a MongoDB
+        client = MongoClient('localhost', 27017)
+        db = client["Amazonas"]
+        pagos_collection = db["Pagos"]
+
+        # Obtener el pago con el pago_id
+        pago = pagos_collection.find_one({"_id": ObjectId(pago_id)})
+
+        if pago:
+            # Calcular la fecha de envío (1 semana después de la fecha de pago)
+            fecha_pago = pago["fecha"]
+            fecha_envio = fecha_pago + timedelta(days=7)
+            
+            # Convertir la fecha de envío a un formato legible
+            fecha_envio_str = fecha_envio.strftime("%d de %B de %Y")
+
+            return render(request, "confirmacion_pago.html", {
+                "pago": pago,
+                "fecha_envio": fecha_envio_str
+            })
+        else:
+            return render(request, "error.html", {"mensaje": "Pago no encontrado."})
+
+    except Exception as e:
+        # Manejar errores de la conexión o cualquier otro error
+        messages.error(request, f"Error al obtener el pago: {str(e)}")
+        return redirect("index")
+    
+    finally:
+        client.close()
+        
+        
+
+#Vista para mostrar pedidos
+@login_required
+def mostrar_pedidos(request):
+    # Obtener el user_id como string para comparar con MongoDB
+    user_id = str(request.user.id)
+
+    try:
+        # Conectar a MongoDB
+        client = MongoClient('localhost', 27017)
+        db = client['Amazonas']
+        pagos_collection = db['Pagos']
+
+        # Imprimir el user_id para depuración
+        print(f"Buscando pedidos para el user_id: {user_id}")
+
+        # Obtener los pagos (pedidos) del usuario, ahora comparando como string
+        pagos = pagos_collection.find({"user_id": user_id})
+
+        # Verificar si se encontraron pagos
+        pagos_list = list(pagos)  # Convertir el cursor en una lista para verificar
+        print(f"Pedidos encontrados: {len(pagos_list)}")
+
+        # Agregar la fecha de envío a cada pago
+        for pago in pagos_list:
+            # Renombrar _id a pedido_id
+            pago["pedido_id"] = str(pago["_id"])  # Convertir ObjectId a string
+            
+            # Calcular la fecha estimada de envío
+            fecha_pago = pago["fecha"]
+            fecha_envio = fecha_pago + timedelta(days=7)  # Sumar 7 días para la fecha de envío
+            pago["fecha_envio"] = fecha_envio.strftime("%d de %B de %Y")  # Convertir a formato legible
+
+        return render(request, 'mostrar_pedidos.html', {'pagos': pagos_list})
+
+    except Exception as e:
+        # Manejar errores de la conexión o cualquier otro error
+        messages.error(request, f"Error al cargar los pedidos: {str(e)}")
+        return redirect("index")  # O redirigir a cualquier otra página deseada
+
+    finally:
+        client.close()
+        
+
+#Vista para mostrar Acerca de
+def acerca_de_nosotros(request):
+    return render(request, 'acerca.html')
 
 
-
-
-
-
-
-def get_user_data(user_id):
-    """Obtiene los datos adicionales del usuario en MongoDB."""
-    collection = database['user_data']
-    user_data = collection.find_one({"user_id": user_id})
-    if not user_data:
-        # Si no existe, crearlo
-        collection.insert_one({"user_id": user_id, "cart": [], "orders": []})
-        user_data = {"user_id": user_id, "cart": [], "orders": []}
-    return user_data
-
-def update_user_cart(user_id, cart_items):
-    """Actualiza el carrito de compras del usuario."""
-    collection = database['user_data']
-    collection.update_one({"user_id": user_id}, {"$set": {"cart": cart_items}})
-
+#Vista para mostrar FAQ
+def preguntas_frecuentes(request):
+    return render(request, 'faq.html')

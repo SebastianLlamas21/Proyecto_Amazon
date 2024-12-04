@@ -1,24 +1,26 @@
-{% include 'header.html' %}
-    
-    {% if messages %}
-        <div class="messages">
-            {% for message in messages %}
-                <div class="message {{ message.tags }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
+{% extends 'base.html' %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <div class="content">
+{% block title %}AMAZONAS{% endblock %}
+
+{% block content %}
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+        <div class="message {{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="content">
     <h2>Productos</h2>
     <div class="product-section">
         {% for producto in productos %}
         <div class="product-card">
             <h2>{{ producto.name }}</h2>
             <p>Precio: ${{ producto.price }}</p>
-            
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
             <!-- Carrusel de imágenes -->
             <div id="carousel-{{ forloop.counter }}" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -50,9 +52,7 @@
         <p>No hay productos disponibles.</p>
     {% endfor %}
     </div>
-        <p id="noResultsMessage">No se encontraron productos.</p>
-    </div>
 </div>
-    
-{% include 'footer.html' %}
+{% endblock %}
+
 

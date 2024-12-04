@@ -1,33 +1,44 @@
 {% include 'header_simple.html' %}
 
-    <div class="container">
-        <h2>Método de Pago</h2>
-    
-        <!-- Mostrar el total de pago recibido desde la vista -->
-        <div class="total">
-            Total a pagar: <span id="total">${{ total_pago|floatformat:2 }}</span>
-        </div>
-    
-        <form id="payment-form">
-            <div class="form-group">
-                <label for="card-name">Nombre en la tarjeta</label>
-                <input type="text" id="card-name" placeholder="Nombre completo" required>
-            </div>
-            <div class="form-group">
-                <label for="card-number">Número de tarjeta</label>
-                <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="16" required>
-            </div>
-            <div class="form-group">
-                <label for="expiry-date">Fecha de vencimiento</label>
-                <input type="date" id="expiry-date" required>
-            </div>
-            <div class="form-group">
-                <label for="cvv">CVV</label>
-                <input type="number" id="cvv" placeholder="123" maxlength="3" required>
-            </div>
-            <button type="button" class="pay-button" onclick="procesarPago()">Pagar</button>
-        </form>
+<div class="container">
+    <h2>Método de Pago</h2>
+
+    <!-- Mostrar el total de pago recibido desde la vista -->
+    <div class="total">
+        Total a pagar: <span id="total">${{ total_pago|floatformat:2 }}</span>
     </div>
+
+    <form id="payment-form" method="POST" action="{% url 'procesar_pago' %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="card-name">Nombre en la tarjeta</label>
+            <input type="text" name="card_name" id="card-name" placeholder="Nombre completo" required>
+        </div>
+
+        <div class="form-group">
+            <label for="card-number">Número de tarjeta</label>
+            <input type="text" name="card_number" id="card-number" placeholder="0000 0000 0000 0000" maxlength="16" required>
+        </div>
+
+        <div class="form-group">
+            <label for="expiry-date">Fecha de vencimiento</label>
+            <input type="date" name="expiry_date" id="expiry-date" required>
+        </div>
+
+        <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input type="number" name="cvv" id="cvv" placeholder="123" maxlength="3" required>
+        </div>
+
+        <!-- Enviar el total al servidor -->
+        <input type="hidden" name="monto" value="{{ total_pago|floatformat:2 }}">
+
+        <!-- Botón para enviar el formulario -->
+        <button type="submit" class="pay-button">Pagar</button>
+    </form>
+</div>
+
        
 </body>
 </html>

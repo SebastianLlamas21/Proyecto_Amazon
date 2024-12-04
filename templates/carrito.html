@@ -1,5 +1,8 @@
-{% include 'header.html' %}
+{% extends 'base.html' %}
 
+{% block title %}Carrito de Compras{% endblock %}
+
+{% block content %}
 <div class="content">
     <h2>Carrito de Compras</h2>
     <div class="cart">
@@ -42,5 +45,4 @@
             <a href="{% url 'pago' %}?total={{ total|floatformat:2 }}" class="checkout-button">Proceder al Pago</a>
         </div>
     {% endif %}
-</body>
-</html>
+{% endblock %}

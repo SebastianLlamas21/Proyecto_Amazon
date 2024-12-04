@@ -3,8 +3,9 @@ html, body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    height: 100%;
-}
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;}
 body {
     display: flex;
     flex-direction: column;
@@ -27,18 +28,8 @@ body {
     font-size: 24px;
     font-weight: bold;
 }
-.content {
-    flex: 1; 
-    padding: 20px;
-}
-.footer {
-    background-color: #232F3E;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    width: 100%;
-    margin-top: auto; 
-}
+
+
 h2 {
     color: #333;
 }
@@ -399,4 +390,174 @@ input[type="date"] {
 }
 .register-container button:hover {
     background-color: #cc7a00;
+}
+
+
+/*Configuraciones de confirmacion de pago*/
+.payment-summary {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.payment-summary h3 {
+    color: #232f3e;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.payment-summary p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.thank-you-message p {
+    font-size: 18px;
+    color: #28a745;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #0073e6;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background-color: #005bb5;
+}
+
+.payment-summary ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.payment-summary ul li {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/*Configuracion para mostrar pedidos*/
+    .order-list {
+        margin-top: 20px;
+    }
+    
+    .order-item {
+        background-color: #f8f9fa;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .order-item h4 {
+        color: #232f3e;
+    }
+    
+    .order-item p {
+        font-size: 16px;
+        color: #555;
+    }
+
+    .order-item ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .order-item ul li {
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+
+    /*Configuracion de acerca de*/
+.about-section {
+    margin-bottom: 40px;
+}
+
+.about-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.about-section p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.about-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.about-section ul li {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.team-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.team h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.team {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.team-member {
+    width: 150px;
+    text-align: center;
+}
+
+.team-member img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.team-member p {
+    margin: 10px 0 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+
+/*Estilo de FAQ*/
+.faq-section {
+    margin-top: 20px;
+}
+.faq-item {
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.faq-item h3 {
+    color: #232f3e;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.faq-item p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
 }

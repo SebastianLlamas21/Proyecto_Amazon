@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmación de Pago{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4">¡Pago Exitoso!</h2>
+    
+    <div class="payment-summary">
+        <h3>Detalles del Pago</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Monto Pagado:</strong> ${{ pago.monto|floatformat:2 }}</p>
+                <p><strong>Fecha del Pago:</strong> {{ pago.fecha }}</p>
+                <p><strong>Método de Pago:</strong> {{ pago.metodo_pago }}</p>
+            </div>
+            <div class="col-md-6">
+                <h4>Productos Comprados:</h4>
+                <ul>
+                    {% for producto in pago.productos %}
+                        <li>{{ producto.name }} - ${{ producto.price|floatformat:2 }} (Cantidad: {{ producto.cantidad }})</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="delivery-info">
+        <h3>Información de Envío</h3>
+        <p><strong>Fecha Estimada de Envío:</strong> {{ fecha_envio }}</p>
+    </div>
+
+    <div class="thank-you-message text-center mt-5">
+        <p>¡Gracias por tu compra!</p>
+        <a href="{% url 'index' %}" class="btn btn-primary btn-lg">Volver al Inicio</a>
+    </div>
+</div>
+{% endblock %}
