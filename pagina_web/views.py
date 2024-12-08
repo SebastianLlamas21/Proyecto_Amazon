@@ -10,19 +10,39 @@ from django.contrib.auth.hashers import make_password
 from bson import ObjectId
 from datetime import datetime, timedelta
 
+# Configuración de conexión a MongoDB
+def conectar_mongo():
+    try:
+        # Conectarse al servidor de MongoDB
+        client = MongoClient('localhost', 27017)
+        db = client['Amazonas']  # Aquí definimos la base de datos de conexión
+        return db
+    except Exception as e:
+        print(f"Error al conectar con MongoDB: {str(e)}")
+        return None
 
-client = MongoClient('localhost', 27017)
-database = client['Amazonas']
+        
+        
+ # Función base para conectar y obtener una colección de MongoDB
+def obtener_coleccion(request, coleccion_name):
+    db = conectar_mongo()
+    if db is None:
+        return JsonResponse({"error": "Error al conectar con la base de datos."}, status=500)
+    
+    collection = db[coleccion_name]  # Obtiene la colección específica
+    
+    # Retornamos la colección para que la vista la use
+    return collection
 
+   
 #Vista Index
 def index(request):
     productos = []  # Lista para almacenar los productos
 
     try:
-        # Conexión a la base de datos MongoDB
-        client = MongoClient('localhost', 27017)
-        database = client['Amazonas']
-        collection = database['Productos']
+        collection = obtener_coleccion(request, 'Productos')  # Especificamos la colección 'Productos'
+        if isinstance(collection, JsonResponse):  # Si la conexión falló, devolvemos el error
+            return collection
 
         # Consulta a MongoDB para obtener los productos, incluyendo _id
         documentos = collection.find({}, {"name": 1, "price": 1, "images": 1, "_id": 1})
@@ -38,9 +58,7 @@ def index(request):
         
     except Exception as ex:
         print("Error durante la conexión: {}".format(ex))
-    finally:
-        client.close()
-        print("Conexión finalizada")
+    
     
     # Pasar los productos al template
     return render(request, 'index.html', {"productos": productos})
@@ -54,9 +72,9 @@ def inicio(request):
 
         try:
             # Conexión a MongoDB
-            client = MongoClient('localhost', 27017)
-            db = client["Amazonas"]
-            collection = db["usuarios"]
+            collection = obtener_coleccion(request, 'usuarios')  # Especificamos la colección 'Productos'
+            if isinstance(collection, JsonResponse):  # Si la conexión falló, devolvemos el error
+                return collection
 
             # Buscar el usuario en MongoDB
             usuario_mongo = collection.find_one({"Email": email})
@@ -86,8 +104,6 @@ def inicio(request):
         except Exception as e:
             messages.error(request, f"Error al conectar con la base de datos: {e}")
 
-        finally:
-            client.close()
 
     return render(request, "inicio.html")
 
@@ -97,9 +113,9 @@ def logout_view(request):
     if request.user.is_authenticated:
         try:
             # Conexión a MongoDB
-            client = MongoClient('localhost', 27017)
-            db = client['Amazonas']  # Nombre de la base de datos
-            collection = db['usuarios']  # Colección de usuarios
+            collection = obtener_coleccion(request, 'usuarios')  # Especificamos la colección 'Productos'
+            if isinstance(collection, JsonResponse):  # Si la conexión falló, devolvemos el error
+                return collection
 
             # Actualizar el estado de sesión en MongoDB
             collection.update_one(
@@ -108,8 +124,6 @@ def logout_view(request):
             )
         except Exception as e:
             print(f"Error al actualizar el estado de sesión en MongoDB: {e}")
-        finally:
-            client.close()
         
         # Cerrar sesión en Django
         logout(request)
@@ -175,6 +189,8 @@ def registrar_usuario_en_mongo_y_django(nombre, email, password):
     finally:
         client.close()
 
+    
+
 
 
 #Buscar productos
@@ -185,20 +201,19 @@ def buscar_productos(request):
     if termino:  # Verificar que el término no esté vacío
         try:
             # Conectar a la base de datos MongoDB
-            client = MongoClient('localhost', 27017)
-            database = client['Amazonas']
-            collection = database['Productos']
+            collection = obtener_coleccion(request, 'Productos')  # Especificamos la colección 'Productos'
+            if isinstance(collection, JsonResponse):  # Si la conexión falló, devolvemos el error
+                return collection
 
             # Buscar productos cuyo nombre coincida parcialmente (insensible a mayúsculas)
             resultados = collection.find({"name": {"$regex": termino, "$options": "i"}})
 
             # Convertir los resultados a una lista de diccionarios
             productos = [
-                {"name": producto["name"], "price": producto["price"], "images": producto["images"]}
+                {"id": str(producto["_id"]),"name": producto["name"], "price": producto["price"], "images": producto["images"]}
                 for producto in resultados
             ]
 
-            client.close()  # Cerrar conexión con la base de datos
         except Exception as ex:
             # Si ocurre un error, puedes agregar manejo de errores aquí
             print(f"Error al buscar productos: {ex}")
@@ -213,39 +228,37 @@ def carrito(request):
     productos = []  # Lista para almacenar los productos del carrito
     subtotal = 0
 
-    if request.user.is_authenticated:
-        try:
-            # Conectar a MongoDB
-            client = MongoClient('localhost', 27017)
-            db = client["Amazonas"]
-            carritos_collection = db["Carritos"]
+    try:
+        # Conectar a MongoDB usando la función centralizada
+        db = conectar_mongo()
+        if db is None:
+            messages.error(request, "Error al conectar con la base de datos.")
+            return redirect("inicio")
 
-            # Obtener el carrito del usuario sin convertir el ID a ObjectId
-            carrito = carritos_collection.find_one({"user_id": str(request.user.id)})
+        carritos_collection = db["Carritos"]
 
-            if carrito:
-                # Procesar los productos del carrito
-                for item in carrito.get("productos", []):
-                    productos.append({
-                        "producto_id": str(item["producto_id"]),  # Convertir el ObjectId a string si es necesario
-                        "name": item["name"],
-                        "price": item["price"],
-                        "cantidad": item["cantidad"],
-                        "images": item.get("images", [])
-                    })
-                    # Calcular el subtotal
-                    subtotal += item.get("price", 0) * item.get("cantidad", 1)
+        # Obtener el carrito del usuario desde MongoDB
+        carrito = carritos_collection.find_one({"user_id": str(request.user.id)})
 
-            #else:
-                #messages.info(request, "Tu carrito está vacío.")
-        except Exception as e:
-            messages.error(request, f"Error al cargar el carrito: {e}")
-        finally:
-            client.close()
-    else:
-        messages.error(request, "Debes iniciar sesión para ver tu carrito.")
-        return redirect("inicio")
+        if carrito:
+            # Procesar los productos del carrito
+            for item in carrito.get("productos", []):
+                productos.append({
+                    "producto_id": str(item["producto_id"]),  # Convertir ObjectId a string si es necesario
+                    "name": item["name"],
+                    "price": item["price"],
+                    "cantidad": item["cantidad"],
+                    "images": item.get("images", [])
+                })
+                # Calcular el subtotal
+                subtotal += item.get("price", 0) * item.get("cantidad", 1)
+        else:
+            messages.info(request, "Tu carrito está vacío.")
 
+    except Exception as e:
+        messages.error(request, f"Error al cargar el carrito: {e}")
+    
+    # Definir el costo de envío basado en el subtotal
     if subtotal < 15:
         costo_envio = 10.00  # Envío de $10 para compras menores a $15
         envio_texto = "Envío: $10.00"
@@ -273,16 +286,19 @@ def agregar_al_carrito(request):
 
         if producto_id and request.user.is_authenticated:
             try:
-                # Conectar a MongoDB
-                client = MongoClient('localhost', 27017)
-                db = client["Amazonas"]
+                # Usar la conexión centralizada a MongoDB
+                db = conectar_mongo()
+                if db is None:
+                    messages.error(request, "No se pudo conectar a la base de datos MongoDB.")
+                    return redirect("index")
+
                 productos_collection = db["Productos"]
                 carritos_collection = db["Carritos"]
 
-                # Usar el ID del usuario como cadena (no convertir a ObjectId)
+                # Usar el ID del usuario como cadena
                 usuario_id = str(request.user.id)
 
-                # Buscar el producto
+                # Buscar el producto en la colección 'Productos'
                 producto = productos_collection.find_one({"_id": ObjectId(producto_id)})
 
                 if producto:
@@ -327,8 +343,7 @@ def agregar_al_carrito(request):
                     messages.error(request, "Producto no encontrado.")
             except Exception as e:
                 messages.error(request, f"Error al agregar al carrito: {e}")
-            finally:
-                client.close()
+            
         else:
             messages.error(request, "No se ha proporcionado un ID de producto válido o no estás autenticado.")
         
@@ -341,8 +356,12 @@ def eliminar_del_carrito(request):
         producto_id = request.POST.get("producto_id")
 
         try:
-            client = MongoClient('localhost', 27017)
-            db = client["Amazonas"]
+            # Usar la conexión centralizada a MongoDB
+            db = conectar_mongo()
+            if db is None:
+                messages.error(request, "No se pudo conectar a la base de datos MongoDB.")
+                return redirect("carrito")
+
             carritos_collection = db["Carritos"]
 
             # Eliminar el producto del carrito
@@ -350,11 +369,10 @@ def eliminar_del_carrito(request):
                 {"user_id": str(request.user.id)},
                 {"$pull": {"productos": {"producto_id": ObjectId(producto_id)}}}
             )
-            #messages.success(request, "Producto eliminado del carrito.")
+
+            messages.success(request, "Producto eliminado del carrito.")
         except Exception as e:
             messages.error(request, f"Error al eliminar el producto: {e}")
-        finally:
-            client.close()
 
     return redirect("carrito")
 
@@ -366,8 +384,12 @@ def actualizar_carrito(request):
         cantidad = int(request.POST.get("cantidad", 1))
 
         try:
-            client = MongoClient('localhost', 27017)
-            db = client["Amazonas"]
+            # Usar la conexión centralizada a MongoDB
+            db = conectar_mongo()
+            if db is None:
+                messages.error(request, "No se pudo conectar a la base de datos MongoDB.")
+                return redirect("carrito")
+
             carritos_collection = db["Carritos"]
 
             # Actualizar la cantidad en el carrito
@@ -375,11 +397,10 @@ def actualizar_carrito(request):
                 {"user_id": str(request.user.id), "productos.producto_id": ObjectId(producto_id)},
                 {"$set": {"productos.$.cantidad": cantidad}}
             )
-            #messages.success(request, "Cantidad actualizada.")
+
+            messages.success(request, "Cantidad actualizada.")
         except Exception as e:
             messages.error(request, f"Error al actualizar el carrito: {e}")
-        finally:
-            client.close()
 
     return redirect("carrito")
 
@@ -398,8 +419,6 @@ def pago(request):
 
 
 #Vista para procesar el pago
-
-
 def procesar_pago(request):
     if request.method == 'POST':
         # Obtener el ID del usuario
@@ -410,9 +429,12 @@ def procesar_pago(request):
         metodo_pago = "Tarjeta"  # Por ejemplo, puedes cambiarlo por otros métodos (ej: PayPal, transferencia)
 
         try:
-            # Conectar a MongoDB
-            client = MongoClient('localhost', 27017)
-            db = client["Amazonas"]
+            # Usar la conexión centralizada a MongoDB
+            db = conectar_mongo()
+            if db is None:
+                messages.error(request, "No se pudo conectar a la base de datos MongoDB.")
+                return redirect("carrito")
+
             carritos_collection = db["Carritos"]
             pagos_collection = db["Pagos"]
 
@@ -451,9 +473,6 @@ def procesar_pago(request):
             messages.error(request, f"Hubo un error al procesar el pago: {str(e)}")
             return redirect("carrito") 
 
-        finally:
-            client.close()
-
     return render(request, "pago.html")
 
 
@@ -461,9 +480,12 @@ def procesar_pago(request):
 #Vista de confirmacion del pago
 def confirmacion_pago(request, pago_id):
     try:
-        # Conectar a MongoDB
-        client = MongoClient('localhost', 27017)
-        db = client["Amazonas"]
+        # Usar la conexión centralizada a MongoDB
+        db = conectar_mongo()
+        if db is None:
+            messages.error(request, "No se pudo conectar a la base de datos MongoDB.")
+            return redirect("index")
+
         pagos_collection = db["Pagos"]
 
         # Obtener el pago con el pago_id
@@ -488,9 +510,6 @@ def confirmacion_pago(request, pago_id):
         # Manejar errores de la conexión o cualquier otro error
         messages.error(request, f"Error al obtener el pago: {str(e)}")
         return redirect("index")
-    
-    finally:
-        client.close()
         
         
 
@@ -501,20 +520,23 @@ def mostrar_pedidos(request):
     user_id = str(request.user.id)
 
     try:
-        # Conectar a MongoDB
-        client = MongoClient('localhost', 27017)
-        db = client['Amazonas']
-        pagos_collection = db['Pagos']
+        # Usar la conexión centralizada a MongoDB
+        db = conectar_mongo()
+        if db is None:
+            messages.error(request, "No se pudo conectar a la base de datos MongoDB.")
+            return redirect("index")
 
-        # Imprimir el user_id para depuración
-        print(f"Buscando pedidos para el user_id: {user_id}")
+        pagos_collection = db['Pagos']
 
         # Obtener los pagos (pedidos) del usuario, ahora comparando como string
         pagos = pagos_collection.find({"user_id": user_id})
 
         # Verificar si se encontraron pagos
         pagos_list = list(pagos)  # Convertir el cursor en una lista para verificar
-        print(f"Pedidos encontrados: {len(pagos_list)}")
+
+        if not pagos_list:
+            messages.info(request, "No tienes pedidos recientes.")
+            return render(request, 'mostrar_pedidos.html', {'pagos': []})
 
         # Agregar la fecha de envío a cada pago
         for pago in pagos_list:
@@ -532,9 +554,6 @@ def mostrar_pedidos(request):
         # Manejar errores de la conexión o cualquier otro error
         messages.error(request, f"Error al cargar los pedidos: {str(e)}")
         return redirect("index")  # O redirigir a cualquier otra página deseada
-
-    finally:
-        client.close()
         
 
 #Vista para mostrar Acerca de

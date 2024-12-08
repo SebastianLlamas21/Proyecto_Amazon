@@ -1,0 +1,1694 @@
+[{
+  "_id": {
+    "$oid": "67447fabe2c2170f4502d104"
+  },
+  "product_id": "B09G9F54FK",
+  "name": "Echo Dot (4th Gen)",
+  "category": "Smart Home",
+  "price": 49.99,
+  "currency": "USD",
+  "rating": 4.7,
+  "reviews_count": 1245,
+  "availability": true,
+  "details": {
+    "brand": "Amazon",
+    "dimensions": "3.9 x 3.9 x 3.5 inches",
+    "weight": "12 ounces",
+    "color": "Charcoal"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61mu3UykGQL._AC_SY450_.jpg",
+    "https://m.media-amazon.com/images/I/61ErthgXGDL._AC_SY450_.jpg",
+    "https://m.media-amazon.com/images/I/61fBneF4uPL._AC_SY450_.jpg"
+  ],
+  "tags": [
+    "smart speaker",
+    "Alexa",
+    "smart home"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T13:46:19.439Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67447fabe2c2170f4502d105"
+  },
+  "product_id": "B08C1W5N87",
+  "name": "Fire TV Stick 4K",
+  "category": "Streaming",
+  "price": 39.99,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 1892,
+  "availability": true,
+  "details": {
+    "brand": "Amazon",
+    "dimensions": "3.4 x 1.2 x 0.5 inches",
+    "weight": "1.1 ounces",
+    "color": "Black"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51jxSTSdvML._AC_SY300_SX300_.jpg",
+    "https://m.media-amazon.com/images/I/61KnDvafnIL._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/51DJlIXYorL._AC_SX679_.jpg"
+  ],
+  "tags": [
+    "streaming",
+    "Fire OS",
+    "4K"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T13:46:19.439Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67447fabe2c2170f4502d106"
+  },
+  "product_id": "B07VGRJDFY",
+  "name": "Kindle Paperwhite",
+  "category": "E-Readers",
+  "price": 129.99,
+  "currency": "USD",
+  "rating": 4.6,
+  "reviews_count": 2534,
+  "availability": false,
+  "details": {
+    "brand": "Amazon",
+    "dimensions": "6.6 x 4.6 x 0.3 inches",
+    "weight": "7.2 ounces",
+    "color": "Black"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51WeXuqsZyL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "e-reader",
+    "Paperwhite",
+    "ebooks"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T13:46:19.439Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67447fabe2c2170f4502d107"
+  },
+  "product_id": "B0932ZFX2V",
+  "name": "Amazon Basics AAA Batteries",
+  "category": "Electronics",
+  "price": 12.99,
+  "currency": "USD",
+  "rating": 4.5,
+  "reviews_count": 6721,
+  "availability": true,
+  "details": {
+    "brand": "Amazon Basics",
+    "dimensions": "3.2 x 1.7 x 4.5 inches",
+    "weight": "1 pound",
+    "color": "N/A"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/81Apg8B6+0L._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/81G2XcIMwDL._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/51jRZ41xHCL._AC_SX679_.jpg"
+  ],
+  "tags": [
+    "batteries",
+    "electronics",
+    "AAA"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T13:46:19.439Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448224c2483cbe6521b5e1"
+  },
+  "product_id": "B08T5QN8YK",
+  "name": "Apple AirPods Pro (2nd Gen)",
+  "category": "Electronics",
+  "price": 249,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 15234,
+  "availability": true,
+  "details": {
+    "brand": "Apple",
+    "dimensions": "2.39 x 2.39 x 1.8 inches",
+    "weight": "1.8 ounces",
+    "color": "White"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_UL480_FMwebp_QL65_.jpg",
+    "https://m.media-amazon.com/images/I/41KJmvuQu4L._AC_SX522_.jpg",
+    "https://m.media-amazon.com/images/I/61nqe+n6AGL._AC_SX522_.jpg"
+  ],
+  "tags": [
+    "wireless",
+    "earbuds",
+    "noise cancelling"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T13:56:52.306Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448224c2483cbe6521b5e2"
+  },
+  "product_id": "B09JQP5FPG",
+  "name": "Samsung Galaxy Watch 6",
+  "category": "Wearable",
+  "price": 299.99,
+  "currency": "USD",
+  "rating": 4.5,
+  "reviews_count": 8239,
+  "availability": true,
+  "details": {
+    "brand": "Samsung",
+    "dimensions": "1.2 x 1.5 x 0.4 inches",
+    "weight": "2.5 ounces",
+    "color": "Black"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51wG7fgCvTL.__AC_SY300_SX300_QL70_ML2_.jpg",
+    "https://m.media-amazon.com/images/I/51wG7fgCvTL.__AC_SY300_SX300_QL70_ML2_.jpg",
+    "https://m.media-amazon.com/images/I/51129aMkJuL._AC_SX679_.jpg"
+  ],
+  "tags": [
+    "smartwatch",
+    "fitness",
+    "wearable"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T13:56:52.306Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448224c2483cbe6521b5e3"
+  },
+  "product_id": "B08CKG3DFJ",
+  "name": "Logitech MX Master 3 Mouse",
+  "category": "Accessories",
+  "price": 99.99,
+  "currency": "USD",
+  "rating": 4.7,
+  "reviews_count": 14230,
+  "availability": true,
+  "details": {
+    "brand": "Logitech",
+    "dimensions": "4.9 x 3.3 x 2.0 inches",
+    "weight": "5 ounces",
+    "color": "Graphite"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51xU1hlYASL.__AC_SX300_SY300_QL70_ML2_.jpg",
+    "https://m.media-amazon.com/images/I/51K1Oh34nCL._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/61OCbdfSDtL._AC_SX679_.jpg"
+  ],
+  "tags": [
+    "mouse",
+    "wireless",
+    "ergonomic"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T13:56:52.306Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448224c2483cbe6521b5e4"
+  },
+  "product_id": "B07W6HR4DC",
+  "name": "Sony WH-1000XM4 Headphones",
+  "category": "Audio",
+  "price": 348,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 35472,
+  "availability": true,
+  "details": {
+    "brand": "Sony",
+    "dimensions": "7.3 x 3.0 x 10.0 inches",
+    "weight": "9 ounces",
+    "color": "Black"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51SKmu2G9FL._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/61lfTKfLawL._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/51lh-9HaJSL._AC_SX679_.jpg"
+  ],
+  "tags": [
+    "headphones",
+    "wireless",
+    "noise cancelling"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T13:56:52.306Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448224c2483cbe6521b5e5"
+  },
+  "product_id": "B08WBBY6XG",
+  "name": "Nintendo Switch OLED Model",
+  "category": "Gaming",
+  "price": 349.99,
+  "currency": "USD",
+  "rating": 4.9,
+  "reviews_count": 28542,
+  "availability": true,
+  "details": {
+    "brand": "Nintendo",
+    "dimensions": "9.5 x 4.0 x 1.0 inches",
+    "weight": "14 ounces",
+    "color": "White"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/71Q54HnKxwS._AC_SX522_.jpg",
+    "https://m.media-amazon.com/images/I/51zjE7FRXmL._AC_SX522_.jpg",
+    "https://m.media-amazon.com/images/I/61AqmjwkwEL._AC_SX522_.jpg"
+  ],
+  "tags": [
+    "console",
+    "gaming",
+    "portable"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T13:56:52.306Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448224c2483cbe6521b5e6"
+  },
+  "product_id": "B081FHYLJ1",
+  "name": "Instant Pot Duo 7-in-1",
+  "category": "Kitchen",
+  "price": 89.99,
+  "currency": "USD",
+  "rating": 4.6,
+  "reviews_count": 148932,
+  "availability": true,
+  "details": {
+    "brand": "Instant Pot",
+    "dimensions": "13.4 x 12.2 x 12.5 inches",
+    "weight": "11 pounds",
+    "color": "Silver"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51tDl2W7S+L._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/51BLg+mYWuL._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/51isH03eaGL._AC_SX679_.jpg"
+  ],
+  "tags": [
+    "cooker",
+    "kitchen",
+    "multi-cooker"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T13:56:52.306Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448224c2483cbe6521b5e7"
+  },
+  "product_id": "B09BJVQZ1W",
+  "name": "Bose QuietComfort 45 Headphones",
+  "category": "Audio",
+  "price": 329,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 25432,
+  "availability": true,
+  "details": {
+    "brand": "Bose",
+    "dimensions": "6.7 x 3.2 x 7.1 inches",
+    "weight": "8.3 ounces",
+    "color": "Triple Black"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51smLBpimbL._AC_SY879_.jpg",
+    "https://m.media-amazon.com/images/I/51Sb35c6-YL._AC_SY879_.jpg",
+    "https://m.media-amazon.com/images/I/517dDUCkNyL._AC_SX679_.jpg"
+  ],
+  "tags": [
+    "headphones",
+    "noise cancelling",
+    "wireless"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T13:56:52.306Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448224c2483cbe6521b5e8"
+  },
+  "product_id": "B082YK1L21",
+  "name": "Razer DeathAdder V2 Mouse",
+  "category": "Gaming Accessories",
+  "price": 69.99,
+  "currency": "USD",
+  "rating": 4.6,
+  "reviews_count": 12345,
+  "availability": true,
+  "details": {
+    "brand": "Razer",
+    "dimensions": "5.0 x 2.9 x 1.7 inches",
+    "weight": "3.2 ounces",
+    "color": "Black"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/41iLtLRTsZL.__AC_SX300_SY300_QL70_ML2_.jpg",
+    "https://m.media-amazon.com/images/I/41CChwuSmXL._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/41gPTYu28eL._AC_SX679_.jpg"
+  ],
+  "tags": [
+    "mouse",
+    "gaming",
+    "wired"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T13:56:52.306Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448224c2483cbe6521b5e9"
+  },
+  "product_id": "B09MVSDCXN",
+  "name": "GoPro HERO10 Black",
+  "category": "Cameras",
+  "price": 399.99,
+  "currency": "USD",
+  "rating": 4.7,
+  "reviews_count": 12892,
+  "availability": true,
+  "details": {
+    "brand": "GoPro",
+    "dimensions": "2.8 x 2.2 x 1.1 inches",
+    "weight": "5.3 ounces",
+    "color": "Black"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51mdslqWtfL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "action camera",
+    "4K",
+    "waterproof"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T13:56:52.306Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448791c2483cbe6521b5ea"
+  },
+  "product_id": "B07P6Y7954",
+  "name": "Kindle Paperwhite (8GB)",
+  "category": "Electronics",
+  "price": 129.99,
+  "currency": "USD",
+  "rating": 4.7,
+  "reviews_count": 18945,
+  "availability": true,
+  "details": {
+    "brand": "Amazon",
+    "dimensions": "6.6 x 4.6 x 0.3 inches",
+    "weight": "6.4 ounces",
+    "color": "Black"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51XcG-1ldXL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "e-reader",
+    "ebook",
+    "waterproof"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:20:01.337Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448791c2483cbe6521b5eb"
+  },
+  "product_id": "B084DWCZY6",
+  "name": "Echo Dot (5th Gen) with Clock",
+  "category": "Smart Home",
+  "price": 59.99,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 23564,
+  "availability": true,
+  "details": {
+    "brand": "Amazon",
+    "dimensions": "3.9 x 3.9 x 3.5 inches",
+    "weight": "12 ounces",
+    "color": "Twilight Blue"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61s73yfJL3L._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "smart speaker",
+    "alexa",
+    "smart home"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:20:01.337Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448791c2483cbe6521b5ec"
+  },
+  "product_id": "B07N4M94RV",
+  "name": "Fitbit Charge 5",
+  "category": "Fitness",
+  "price": 149.95,
+  "currency": "USD",
+  "rating": 4.5,
+  "reviews_count": 27453,
+  "availability": true,
+  "details": {
+    "brand": "Fitbit",
+    "dimensions": "1.5 x 0.9 x 0.5 inches",
+    "weight": "1.0 ounce",
+    "color": "Steel Blue"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51qHOQ7FaJL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "fitness tracker",
+    "wearable",
+    "health monitoring"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:20:01.337Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448791c2483cbe6521b5ed"
+  },
+  "product_id": "B08XZVQDBL",
+  "name": "Dell XPS 13 Laptop",
+  "category": "Computers",
+  "price": 999.99,
+  "currency": "USD",
+  "rating": 4.6,
+  "reviews_count": 13456,
+  "availability": true,
+  "details": {
+    "brand": "Dell",
+    "dimensions": "11.6 x 7.8 x 0.6 inches",
+    "weight": "2.7 pounds",
+    "color": "Silver"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61J7pyX8KVL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "laptop",
+    "ultrabook",
+    "Windows"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:20:01.337Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448791c2483cbe6521b5ee"
+  },
+  "product_id": "B09JHZHV5D",
+  "name": "HP Envy 6055e All-in-One Printer",
+  "category": "Office",
+  "price": 149.99,
+  "currency": "USD",
+  "rating": 4.3,
+  "reviews_count": 8245,
+  "availability": true,
+  "details": {
+    "brand": "HP",
+    "dimensions": "17 x 14 x 5.2 inches",
+    "weight": "11.6 pounds",
+    "color": "White"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51g-u6FlEZL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "printer",
+    "scanner",
+    "office"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:20:01.337Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448791c2483cbe6521b5ef"
+  },
+  "product_id": "B08WJ29QBS",
+  "name": "Anker PowerCore Portable Charger",
+  "category": "Electronics",
+  "price": 49.99,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 34256,
+  "availability": true,
+  "details": {
+    "brand": "Anker",
+    "dimensions": "5.9 x 2.7 x 0.9 inches",
+    "weight": "0.6 pounds",
+    "color": "Black"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61-dMOyKA0L._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "charger",
+    "power bank",
+    "portable"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:20:01.337Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448791c2483cbe6521b5f0"
+  },
+  "product_id": "B07YQ58PHC",
+  "name": "LEGO Creator 3-in-1 Set",
+  "category": "Toys",
+  "price": 49.99,
+  "currency": "USD",
+  "rating": 4.9,
+  "reviews_count": 14523,
+  "availability": true,
+  "details": {
+    "brand": "LEGO",
+    "dimensions": "15.0 x 10.0 x 3.0 inches",
+    "weight": "1.5 pounds",
+    "color": "Multicolor"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61X6UvOOppL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "building set",
+    "toys",
+    "LEGO"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:20:01.337Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448791c2483cbe6521b5f1"
+  },
+  "product_id": "B084P6TL39",
+  "name": "KitchenAid Artisan Stand Mixer",
+  "category": "Kitchen",
+  "price": 399.99,
+  "currency": "USD",
+  "rating": 4.9,
+  "reviews_count": 25634,
+  "availability": true,
+  "details": {
+    "brand": "KitchenAid",
+    "dimensions": "14.3 x 9.3 x 14.0 inches",
+    "weight": "22 pounds",
+    "color": "Empire Red"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/71cQSaMK8fL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "kitchen",
+    "mixer",
+    "baking"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:20:01.337Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448791c2483cbe6521b5f2"
+  },
+  "product_id": "B087T3ZTPQ",
+  "name": "Sony A7 III Camera",
+  "category": "Cameras",
+  "price": 1999.99,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 15324,
+  "availability": true,
+  "details": {
+    "brand": "Sony",
+    "dimensions": "5.0 x 3.8 x 2.9 inches",
+    "weight": "1.4 pounds",
+    "color": "Black"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/91+jG43jKML._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "camera",
+    "mirrorless",
+    "photography"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:20:01.337Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448791c2483cbe6521b5f3"
+  },
+  "product_id": "B095KD9ZTR",
+  "name": "iRobot Roomba i7+",
+  "category": "Home",
+  "price": 799.99,
+  "currency": "USD",
+  "rating": 4.6,
+  "reviews_count": 21234,
+  "availability": true,
+  "details": {
+    "brand": "iRobot",
+    "dimensions": "13.3 x 13.3 x 3.6 inches",
+    "weight": "7.4 pounds",
+    "color": "Black"
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/814DcUDq6LL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "vacuum",
+    "robot",
+    "smart home"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:20:01.337Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6744890ac2483cbe6521b5f4"
+  },
+  "product_id": "B09G6KQ62Z",
+  "name": "Apple iPhone 14 Pro (128GB, Space Black)",
+  "category": "Smartphones",
+  "price": 999.99,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 32145,
+  "availability": true,
+  "details": {
+    "brand": "Apple",
+    "dimensions": "5.81 x 2.81 x 0.31 inches",
+    "weight": "7.27 ounces",
+    "color": "Space Black",
+    "warranty": "1 year limited warranty",
+    "features": [
+      "A16 Bionic chip",
+      "Dynamic Island",
+      "48MP Main Camera"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51xiCpbirGL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "smartphone",
+    "Apple",
+    "iPhone"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:26:18.628Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6744890ac2483cbe6521b5f5"
+  },
+  "product_id": "B08H75RTZ8",
+  "name": "Samsung 65-Inch QLED 4K Smart TV",
+  "category": "Electronics",
+  "price": 1299.99,
+  "currency": "USD",
+  "rating": 4.7,
+  "reviews_count": 18453,
+  "availability": true,
+  "details": {
+    "brand": "Samsung",
+    "dimensions": "57.1 x 32.7 x 2.1 inches",
+    "weight": "53.4 pounds",
+    "color": "Black",
+    "warranty": "2 years",
+    "features": [
+      "Quantum HDR",
+      "Alexa Built-in",
+      "120Hz Refresh Rate"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61fx2Jt-6YL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "smart tv",
+    "Samsung",
+    "4K"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:26:18.628Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6744890ac2483cbe6521b5f6"
+  },
+  "product_id": "B07XYHJF3B",
+  "name": "Sony WH-1000XM4 Wireless Noise-Cancelling Headphones",
+  "category": "Audio",
+  "price": 349.99,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 28432,
+  "availability": true,
+  "details": {
+    "brand": "Sony",
+    "dimensions": "7.27 x 3.03 x 9.94 inches",
+    "weight": "8.95 ounces",
+    "color": "Silver",
+    "warranty": "1 year",
+    "features": [
+      "Active Noise Cancellation",
+      "30-hour Battery",
+      "Touch Controls"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/511c23mDjoL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "headphones",
+    "wireless",
+    "noise-cancelling"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:26:18.628Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6744890ac2483cbe6521b5f7"
+  },
+  "product_id": "B07VPQT7LX",
+  "name": "Ninja Foodi 10-in-1 Pressure Cooker and Air Fryer",
+  "category": "Kitchen Appliances",
+  "price": 229.99,
+  "currency": "USD",
+  "rating": 4.7,
+  "reviews_count": 19657,
+  "availability": true,
+  "details": {
+    "brand": "Ninja",
+    "dimensions": "16.1 x 14.6 x 14.2 inches",
+    "weight": "26 pounds",
+    "color": "Black",
+    "warranty": "1 year",
+    "features": [
+      "Pressure Cook",
+      "Air Fry",
+      "Dehydrate"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/41qIscjV8RL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "kitchen",
+    "cooking",
+    "appliance"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:26:18.628Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6744890ac2483cbe6521b5f8"
+  },
+  "product_id": "B08JWMPVD4",
+  "name": "Microsoft Surface Pro 8 (Intel i7, 16GB RAM, 512GB SSD)",
+  "category": "Computers",
+  "price": 1599.99,
+  "currency": "USD",
+  "rating": 4.6,
+  "reviews_count": 11234,
+  "availability": true,
+  "details": {
+    "brand": "Microsoft",
+    "dimensions": "11.3 x 8.2 x 0.37 inches",
+    "weight": "1.96 pounds",
+    "color": "Platinum",
+    "warranty": "1 year",
+    "features": [
+      "13-inch Touchscreen",
+      "Windows 11",
+      "Detachable Keyboard"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51dJQZgVpnL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "tablet",
+    "laptop",
+    "Windows"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:26:18.628Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6744890ac2483cbe6521b5f9"
+  },
+  "product_id": "B08CB3H2JG",
+  "name": "GoPro HERO10 Black",
+  "category": "Cameras",
+  "price": 499.99,
+  "currency": "USD",
+  "rating": 4.6,
+  "reviews_count": 15476,
+  "availability": true,
+  "details": {
+    "brand": "GoPro",
+    "dimensions": "2.8 x 2.2 x 1.3 inches",
+    "weight": "5.3 ounces",
+    "color": "Black",
+    "warranty": "1 year",
+    "features": [
+      "5.3K Video",
+      "23MP Photos",
+      "Waterproof"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61Uxk4ukw4L._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "action camera",
+    "GoPro",
+    "waterproof"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:26:18.628Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6744890ac2483cbe6521b5fa"
+  },
+  "product_id": "B07XJ8C8F5",
+  "name": "Dyson V11 Torque Drive Cordless Vacuum Cleaner",
+  "category": "Home Appliances",
+  "price": 699.99,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 17234,
+  "availability": true,
+  "details": {
+    "brand": "Dyson",
+    "dimensions": "50.63 x 9.84 x 10.28 inches",
+    "weight": "6.68 pounds",
+    "color": "Blue",
+    "warranty": "2 years",
+    "features": [
+      "Cordless",
+      "High Torque Cleaner Head",
+      "LCD Display"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61K0HXoDWZL._AC_SX679_.jpg"
+  ],
+  "tags": [
+    "vacuum",
+    "Dyson",
+    "cordless"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:26:18.628Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6744890ac2483cbe6521b5fb"
+  },
+  "product_id": "B089KV4YYX",
+  "name": "Peloton Bike+",
+  "category": "Fitness Equipment",
+  "price": 2495,
+  "currency": "USD",
+  "rating": 4.7,
+  "reviews_count": 8234,
+  "availability": true,
+  "details": {
+    "brand": "Peloton",
+    "dimensions": "59 x 22 x 59 inches",
+    "weight": "140 pounds",
+    "color": "Black",
+    "warranty": "12 months",
+    "features": [
+      "22-inch Touchscreen",
+      "Live & On-Demand Classes",
+      "Rotating Screen"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/711fYA+Mx2L._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "fitness",
+    "bike",
+    "Peloton"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:26:18.628Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "674489f9c2483cbe6521b5fc"
+  },
+  "product_id": "B07YSNLF5Z",
+  "name": "Kindle Paperwhite (8GB) – Now with a 6.8” Display and Adjustable Warm Light",
+  "category": "E-readers",
+  "price": 139.99,
+  "currency": "USD",
+  "rating": 4.7,
+  "reviews_count": 45678,
+  "availability": true,
+  "details": {
+    "brand": "Amazon",
+    "dimensions": "6.9 x 4.9 x 0.32 inches",
+    "weight": "7.23 ounces",
+    "color": "Black",
+    "warranty": "1 year",
+    "features": [
+      "Waterproof",
+      "300 ppi Display",
+      "Adjustable Warm Light"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51hImtwnntL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "e-reader",
+    "Kindle",
+    "books"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:30:17.953Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "674489f9c2483cbe6521b5fd"
+  },
+  "product_id": "B08N5WRWNW",
+  "name": "Jabra Elite 85t True Wireless Bluetooth Earbuds",
+  "category": "Audio",
+  "price": 229.99,
+  "currency": "USD",
+  "rating": 4.5,
+  "reviews_count": 18903,
+  "availability": true,
+  "details": {
+    "brand": "Jabra",
+    "dimensions": "2.5 x 2.5 x 1.1 inches",
+    "weight": "7 ounces",
+    "color": "Titanium Black",
+    "warranty": "2 years",
+    "features": [
+      "Active Noise Cancellation",
+      "Wireless Charging",
+      "Bluetooth 5.1"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61jHD+u1nnL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "earbuds",
+    "wireless",
+    "Jabra"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:30:17.953Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "674489f9c2483cbe6521b5fe"
+  },
+  "product_id": "B07W8RPX1M",
+  "name": "Instant Pot Duo 7-in-1 Electric Pressure Cooker",
+  "category": "Kitchen Appliances",
+  "price": 99.99,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 67989,
+  "availability": true,
+  "details": {
+    "brand": "Instant Pot",
+    "dimensions": "13.38 x 12.2 x 12.48 inches",
+    "weight": "11.8 pounds",
+    "color": "Stainless Steel",
+    "warranty": "1 year",
+    "features": [
+      "Pressure Cook",
+      "Slow Cook",
+      "Yogurt Maker"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/71LmN7FsaZL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "kitchen",
+    "cooking",
+    "appliance"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:30:17.953Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "674489f9c2483cbe6521b5ff"
+  },
+  "product_id": "B094Z5HY1Z",
+  "name": "Fitbit Charge 5 Advanced Fitness & Health Tracker",
+  "category": "Wearable Technology",
+  "price": 149.99,
+  "currency": "USD",
+  "rating": 4.6,
+  "reviews_count": 23456,
+  "availability": true,
+  "details": {
+    "brand": "Fitbit",
+    "dimensions": "1.45 x 0.91 x 0.45 inches",
+    "weight": "1.1 ounces",
+    "color": "Black/Graphite",
+    "warranty": "1 year",
+    "features": [
+      "Stress Management",
+      "Heart Rate Monitoring",
+      "Sleep Tracking"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61VHndA2TwL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "fitness tracker",
+    "health",
+    "Fitbit"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:30:17.953Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "674489f9c2483cbe6521b600"
+  },
+  "product_id": "B092JND5WM",
+  "name": "Anker PowerCore Essential 20000mAh Power Bank",
+  "category": "Electronics",
+  "price": 49.99,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 15478,
+  "availability": true,
+  "details": {
+    "brand": "Anker",
+    "dimensions": "6.4 x 2.5 x 0.9 inches",
+    "weight": "12.2 ounces",
+    "color": "Black",
+    "warranty": "1.5 years",
+    "features": [
+      "High Capacity",
+      "Dual USB Ports",
+      "Fast Charging"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61Ik1BCIqML._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "power bank",
+    "charger",
+    "Anker"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:30:17.953Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448cbbc2483cbe6521b601"
+  },
+  "product_id": "B09YMJPZXQ",
+  "name": "HP Envy x360 Convertible Laptop",
+  "category": "Computers",
+  "price": 849.99,
+  "currency": "USD",
+  "rating": 4.5,
+  "reviews_count": 12450,
+  "availability": true,
+  "details": {
+    "brand": "HP",
+    "dimensions": "14.1 x 9.06 x 0.7 inches",
+    "weight": "4.41 pounds",
+    "color": "Nightfall Black",
+    "warranty": "1 year",
+    "features": [
+      "11th Gen Intel Core i7",
+      "16GB RAM",
+      "512GB SSD"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/614xMvyp7GL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "laptop",
+    "convertible",
+    "HP"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:42:03.775Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448cbbc2483cbe6521b602"
+  },
+  "product_id": "B08P3YBK8V",
+  "name": "Logitech MX Master 3 Advanced Wireless Mouse",
+  "category": "Accessories",
+  "price": 99.99,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 18792,
+  "availability": true,
+  "details": {
+    "brand": "Logitech",
+    "dimensions": "4.92 x 3.31 x 2.0 inches",
+    "weight": "5 ounces",
+    "color": "Graphite",
+    "warranty": "1 year",
+    "features": [
+      "Ultrafast Scrolling",
+      "Ergonomic Design",
+      "USB-C Rechargeable"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/71zrspuT1pL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "mouse",
+    "wireless",
+    "Logitech"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:42:03.775Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448cbbc2483cbe6521b603"
+  },
+  "product_id": "B08R7ZMZK4",
+  "name": "Ring Video Doorbell 4",
+  "category": "Home Security",
+  "price": 199.99,
+  "currency": "USD",
+  "rating": 4.6,
+  "reviews_count": 15400,
+  "availability": true,
+  "details": {
+    "brand": "Ring",
+    "dimensions": "5.1 x 2.4 x 1.1 inches",
+    "weight": "6.7 ounces",
+    "color": "Satin Nickel",
+    "warranty": "1 year",
+    "features": [
+      "1080p HD Video",
+      "Two-Way Talk",
+      "Motion Detection"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/518cXgLlvAL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "doorbell",
+    "security",
+    "Ring"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:42:03.775Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448cbbc2483cbe6521b604"
+  },
+  "product_id": "B094KLBJ4L",
+  "name": "Samsung Galaxy Tab S7+ Wi-Fi Tablet",
+  "category": "Tablets",
+  "price": 749.99,
+  "currency": "USD",
+  "rating": 4.7,
+  "reviews_count": 28432,
+  "availability": true,
+  "details": {
+    "brand": "Samsung",
+    "dimensions": "11.22 x 7.28 x 0.22 inches",
+    "weight": "1.28 pounds",
+    "color": "Mystic Black",
+    "warranty": "1 year",
+    "features": [
+      "12.4-inch Super AMOLED Display",
+      "S Pen Included",
+      "128GB Storage"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61YY3z1XkaS._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "tablet",
+    "Samsung",
+    "Galaxy"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:42:03.775Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448cbbc2483cbe6521b605"
+  },
+  "product_id": "B08P5L9PN8",
+  "name": "Sony A7 III Full-Frame Mirrorless Camera",
+  "category": "Cameras",
+  "price": 1999.99,
+  "currency": "USD",
+  "rating": 4.9,
+  "reviews_count": 24354,
+  "availability": true,
+  "details": {
+    "brand": "Sony",
+    "dimensions": "5 x 3.9 x 3 inches",
+    "weight": "1.43 pounds",
+    "color": "Black",
+    "warranty": "1 year",
+    "features": [
+      "24.2MP Full-Frame Sensor",
+      "4K HDR Video",
+      "5-Axis Stabilization"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61UjHYHf+vL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "camera",
+    "mirrorless",
+    "Sony"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:42:03.775Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448cbbc2483cbe6521b606"
+  },
+  "product_id": "B08HJQ94KP",
+  "name": "Bose QuietComfort 45 Bluetooth Headphones",
+  "category": "Audio",
+  "price": 329.99,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 19245,
+  "availability": true,
+  "details": {
+    "brand": "Bose",
+    "dimensions": "7.25 x 6 x 3 inches",
+    "weight": "8.5 ounces",
+    "color": "Black",
+    "warranty": "1 year",
+    "features": [
+      "Noise Cancelling",
+      "20-hour Battery Life",
+      "Alexa Built-In"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51smLBpimbL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "headphones",
+    "Bluetooth",
+    "Bose"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:42:03.775Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448cbbc2483cbe6521b607"
+  },
+  "product_id": "B07VF9KLNC",
+  "name": "Garmin Fenix 6 Pro Solar Smartwatch",
+  "category": "Wearable Technology",
+  "price": 699.99,
+  "currency": "USD",
+  "rating": 4.7,
+  "reviews_count": 15678,
+  "availability": true,
+  "details": {
+    "brand": "Garmin",
+    "dimensions": "1.8 x 1.8 x 0.58 inches",
+    "weight": "2.9 ounces",
+    "color": "Black",
+    "warranty": "1 year",
+    "features": [
+      "GPS",
+      "Solar Charging",
+      "Heart Rate Monitoring"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/71C8Qc8Y3aL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "smartwatch",
+    "Garmin",
+    "fitness"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:42:03.775Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67448cbbc2483cbe6521b608"
+  },
+  "product_id": "B08N5WRWNW",
+  "name": "Dell UltraSharp 27-Inch 4K Monitor",
+  "category": "Monitors",
+  "price": 499.99,
+  "currency": "USD",
+  "rating": 4.7,
+  "reviews_count": 12534,
+  "availability": true,
+  "details": {
+    "brand": "Dell",
+    "dimensions": "24.1 x 7.3 x 20.7 inches",
+    "weight": "15.1 pounds",
+    "color": "Black",
+    "warranty": "3 years",
+    "features": [
+      "4K UHD Display",
+      "IPS Panel",
+      "InfinityEdge Design"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/91s46jyQXML._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "monitor",
+    "4K",
+    "Dell"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T14:42:03.775Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "674494bac2483cbe6521b609"
+  },
+  "product_id": "B09DXYZ6RV",
+  "name": "Apple MacBook Pro 14-inch M2 Pro",
+  "category": "Computers",
+  "price": 1999.99,
+  "currency": "USD",
+  "rating": 4.9,
+  "reviews_count": 17450,
+  "availability": true,
+  "details": {
+    "brand": "Apple",
+    "dimensions": "12.31 x 8.71 x 0.61 inches",
+    "weight": "3.5 pounds",
+    "color": "Space Gray",
+    "warranty": "1 year",
+    "features": [
+      "M2 Pro Chip",
+      "16GB Unified Memory",
+      "512GB SSD"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/419G6mu2MpL._AC_UL480_FMwebp_QL65_.jpg"
+  ],
+  "tags": [
+    "laptop",
+    "Apple",
+    "MacBook"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T15:16:10.119Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "674494bac2483cbe6521b60a"
+  },
+  "product_id": "B0BQBTZ4M9",
+  "name": "Sony WH-1000XM5 Wireless Noise-Cancelling Headphones",
+  "category": "Audio",
+  "price": 349.99,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 20345,
+  "availability": true,
+  "details": {
+    "brand": "Sony",
+    "dimensions": "7.27 x 6.03 x 3.03 inches",
+    "weight": "8.8 ounces",
+    "color": "Silver",
+    "warranty": "1 year",
+    "features": [
+      "Noise Cancelling",
+      "30-hour Battery Life",
+      "Bluetooth 5.0"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/513U42CFypL._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/41PsKJ1TujL._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/41S6MwolDqL._AC_SX679_.jpg"
+  ],
+  "tags": [
+    "headphones",
+    "Bluetooth",
+    "Sony"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T15:16:10.119Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "674494bac2483cbe6521b60b"
+  },
+  "product_id": "B09GZP3CY8",
+  "name": "Samsung Galaxy Watch 6 Classic",
+  "category": "Wearable Technology",
+  "price": 399.99,
+  "currency": "USD",
+  "rating": 4.7,
+  "reviews_count": 14320,
+  "availability": true,
+  "details": {
+    "brand": "Samsung",
+    "dimensions": "1.8 x 1.8 x 0.5 inches",
+    "weight": "2.5 ounces",
+    "color": "Silver",
+    "warranty": "1 year",
+    "features": [
+      "Rotating Bezel",
+      "ECG Monitoring",
+      "Advanced Sleep Tracking"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/61s77epX5QL.__AC_SY300_SX300_QL70_ML2_.jpg",
+    "https://m.media-amazon.com/images/I/51beYlDpD+L._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/61CFjLwd8TL._AC_SX679_.jpg"
+  ],
+  "tags": [
+    "smartwatch",
+    "Samsung",
+    "fitness"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T15:16:10.119Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "674494bac2483cbe6521b60c"
+  },
+  "product_id": "B0BTS45XJZ",
+  "name": "Dyson V15 Detect Cordless Vacuum Cleaner",
+  "category": "Home Appliances",
+  "price": 749.99,
+  "currency": "USD",
+  "rating": 4.9,
+  "reviews_count": 16450,
+  "availability": true,
+  "details": {
+    "brand": "Dyson",
+    "dimensions": "49.6 x 9.8 x 10.3 inches",
+    "weight": "6.8 pounds",
+    "color": "Yellow",
+    "warranty": "2 years",
+    "features": [
+      "Laser Dust Detection",
+      "60-minute Runtime",
+      "Anti-Tangle Technology"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/71ETUfiUrzL._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/81stPfk9W6L._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/71Y7UJFzoYL._AC_SX679_.jpg"
+  ],
+  "tags": [
+    "vacuum cleaner",
+    "cordless",
+    "Dyson"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T15:16:10.119Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "674494bac2483cbe6521b60d"
+  },
+  "product_id": "B09YZ7J5T8",
+  "name": "GoPro HERO11 Black Action Camera",
+  "category": "Cameras",
+  "price": 499.99,
+  "currency": "USD",
+  "rating": 4.8,
+  "reviews_count": 21560,
+  "availability": true,
+  "details": {
+    "brand": "GoPro",
+    "dimensions": "2.8 x 2.2 x 1.3 inches",
+    "weight": "4.3 ounces",
+    "color": "Black",
+    "warranty": "1 year",
+    "features": [
+      "5.3K Video",
+      "HyperSmooth Stabilization",
+      "Waterproof"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/71xvL9XGwYL.__AC_SX300_SY300_QL70_ML2_.jpg",
+    "https://m.media-amazon.com/images/I/81Pd79JOubL._AC_SX679_.jpg",
+    "https://m.media-amazon.com/images/I/816IBr7EaGL._AC_SX679_.jpg"
+  ],
+  "tags": [
+    "action camera",
+    "GoPro",
+    "adventure"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T15:16:10.119Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "674494bac2483cbe6521b60e"
+  },
+  "product_id": "B08XYHBFT9",
+  "name": "Instant Pot Duo Evo Plus 9-in-1 Pressure Cooker",
+  "category": "Kitchen Appliances",
+  "price": 149.99,
+  "currency": "USD",
+  "rating": 4.9,
+  "reviews_count": 25430,
+  "availability": true,
+  "details": {
+    "brand": "Instant Pot",
+    "dimensions": "14.2 x 13.9 x 14.2 inches",
+    "weight": "12.1 pounds",
+    "color": "Stainless Steel",
+    "warranty": "1 year",
+    "features": [
+      "9 Cooking Modes",
+      "QuickCool Technology",
+      "70% Faster Cooking"
+    ]
+  },
+  "images": [
+    "https://m.media-amazon.com/images/I/51-oTe0ZtGL.__AC_SY300_SX300_QL70_ML2_.jpg",
+    "https://m.media-amazon.com/images/I/71Bu6FjbIvL._AC_SL1000_.jpg",
+    "https://m.media-amazon.com/images/I/614+q9hSutL._AC_SL1000_.jpg"
+  ],
+  "tags": [
+    "pressure cooker",
+    "Instant Pot",
+    "multi-cooker"
+  ],
+  "date_added": {
+    "$date": "2024-11-25T15:16:10.119Z"
+  }
+}]
