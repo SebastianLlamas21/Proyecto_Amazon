@@ -1,4 +1,13 @@
 {% include 'header_simple.html' %}
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div class="message {{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
 
 <div class="container">
     <h2>Método de Pago</h2>
@@ -13,22 +22,27 @@
 
         <div class="form-group">
             <label for="card-name">Nombre en la tarjeta</label>
-            <input type="text" name="card_name" id="card-name" placeholder="Nombre completo" required>
+            <input type="text" name="card_name" id="card-name" placeholder="Nombre completo"
+                value="{{ card_name|default_if_none:'' }}" required>
         </div>
 
         <div class="form-group">
             <label for="card-number">Número de tarjeta</label>
-            <input type="text" name="card_number" id="card-number" placeholder="0000 0000 0000 0000" maxlength="16" required>
+            <input type="text" name="card_number" id="card-number" placeholder="0000 0000 0000 0000" maxlength="16"
+                value="{{ card_number|default_if_none:'' }}" required>
         </div>
 
         <div class="form-group">
             <label for="expiry-date">Fecha de vencimiento</label>
-            <input type="date" name="expiry_date" id="expiry-date" required>
+            <input type="month" name="expiry_date" id="expiry-date" value="{{ expiry_date|default_if_none:'' }}"
+                required>
+
         </div>
 
         <div class="form-group">
             <label for="cvv">CVV</label>
-            <input type="number" name="cvv" id="cvv" placeholder="123" maxlength="3" required>
+            <input type="text" class="cvv" name="cvv" id="cvv" placeholder="123" maxlength="4"  inputmode="numeric"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{ cvv|default_if_none:'' }}" required>
         </div>
 
         <!-- Enviar el total al servidor -->
@@ -39,6 +53,60 @@
     </form>
 </div>
 
-       
+
+<script>
+    function validarLuhn(numero) {
+        numero = numero.replace(/\s+/g, '');
+        if (!/^\d+$/.test(numero)) return false;
+
+        let suma = 0;
+        let debeDuplicar = false;
+
+        for (let i = numero.length - 1; i >= 0; i--) {
+            let digito = parseInt(numero.charAt(i), 10);
+            if (debeDuplicar) {
+                digito *= 2;
+                if (digito > 9) digito -= 9;
+            }
+            suma += digito;
+            debeDuplicar = !debeDuplicar;
+        }
+        return (suma % 10) === 0;
+    }
+
+    document.getElementById('payment-form').addEventListener('submit', function (event) {
+        const cardNumber = document.getElementById('card-number').value.trim();
+        const expiryDate = document.getElementById('expiry-date').value;
+        const cvv = document.getElementById('cvv').value.trim();
+
+        if (!validarLuhn(cardNumber)) {
+            alert('Número de tarjeta inválido.');
+            event.preventDefault();
+            return false;
+        }
+
+        if (!expiryDate) {
+            alert('Por favor, ingresa la fecha de vencimiento.');
+            event.preventDefault();
+            return false;
+        }
+        const hoy = new Date();
+        const [anio, mes] = expiryDate.split('-').map(Number);
+        const fechaVenc = new Date(anio, mes - 1, 1);
+        if (fechaVenc < new Date(hoy.getFullYear(), hoy.getMonth(), 1)) {
+            alert('La fecha de vencimiento debe ser en el futuro.');
+            event.preventDefault();
+            return false;
+        }
+
+        if (!/^\d{3,4}$/.test(cvv)) {
+            alert('CVV inválido. Debe tener 3 o 4 dígitos.');
+            event.preventDefault();
+            return false;
+        }
+    });
+</script>
+
 </body>
+
 </html>

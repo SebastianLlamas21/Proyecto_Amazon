@@ -398,7 +398,7 @@ def actualizar_carrito(request):
                 {"$set": {"productos.$.cantidad": cantidad}}
             )
 
-            messages.success(request, "Cantidad actualizada.")
+            #messages.success(request, "Cantidad actualizada.")
         except Exception as e:
             messages.error(request, f"Error al actualizar el carrito: {e}")
 
@@ -418,18 +418,120 @@ def pago(request):
     return render(request, "pago.html", {"total_pago": total})
 
 
+#Validacion del Pago Aloritmo de Luhn
+def validar_luhn(numero):
+    numero = numero.replace(' ', '')
+    if not numero.isdigit():
+        return False
+    suma = 0
+    debe_duplicar = False
+    for digito in reversed(numero):
+        d = int(digito)
+        if debe_duplicar:
+            d *= 2
+            if d > 9:
+                d -= 9
+        suma += d
+        debe_duplicar = not debe_duplicar
+    return suma % 10 == 0
+
+
 #Vista para procesar el pago
+from datetime import datetime, date
+from django.contrib import messages
+from django.shortcuts import redirect, render
+
+def validar_luhn(numero):
+    numero = numero.replace(' ', '')
+    if not numero.isdigit():
+        return False
+    suma = 0
+    debe_duplicar = False
+    for digito in reversed(numero):
+        d = int(digito)
+        if debe_duplicar:
+            d *= 2
+            if d > 9:
+                d -= 9
+        suma += d
+        debe_duplicar = not debe_duplicar
+    return suma % 10 == 0
+
+
 def procesar_pago(request):
     if request.method == 'POST':
-        # Obtener el ID del usuario
         user_id = str(request.user.id) if request.user.is_authenticated else None
-        nombre_tarjeta = request.POST.get('card_name')
-        numero_tarjeta = request.POST.get('card_number')  # Este dato no debe almacenarse en texto claro, solo para validaciones
-        monto = float(request.POST.get('monto', 0))
-        metodo_pago = "Tarjeta"  # Por ejemplo, puedes cambiarlo por otros métodos (ej: PayPal, transferencia)
+        nombre_tarjeta = request.POST.get('card_name', '').strip()
+        numero_tarjeta = request.POST.get('card_number', '').strip()
+        expiry_date = request.POST.get('expiry_date', '').strip()
+        cvv = request.POST.get('cvv', '').strip()
+        monto = request.POST.get('monto', '0').strip()
 
+        # Para mostrar en caso de error y que el usuario no pierda datos
+        context = {
+            'total_pago': monto,
+            'card_name': nombre_tarjeta,
+            'card_number': numero_tarjeta,
+            'expiry_date': expiry_date,
+            'cvv': cvv,
+        }
+
+        # Validar monto
         try:
-            # Usar la conexión centralizada a MongoDB
+            monto = float(monto)
+            if monto <= 0:
+                messages.error(request, "Monto inválido.")
+                return render(request, 'pago.html', context)
+        except:
+            messages.error(request, "Monto inválido.")
+            return render(request, 'pago.html', context)
+
+        # Validar número tarjeta con Luhn
+        if not validar_luhn(numero_tarjeta):
+            messages.error(request, "Número de tarjeta inválido.")
+            return render(request, 'pago.html', context)
+
+        # Validar fecha de expiración
+        try:
+            anio, mes = map(int, expiry_date.split('-'))
+            fecha_venc = date(anio, mes, 1)
+            hoy = date.today().replace(day=1)
+            if fecha_venc < hoy:
+                messages.error(request, "La fecha de vencimiento debe ser futura.")
+                return render(request, 'pago.html', {
+                    'total_pago': monto,
+                    'card_name': nombre_tarjeta,
+                    'card_number': numero_tarjeta,
+                    'expiry_date': expiry_date,
+                    'cvv': cvv
+                })
+        except Exception:
+            messages.error(request, "Fecha de vencimiento inválida.")
+            return render(request, 'pago.html', {
+                'total_pago': monto,
+                'card_name': nombre_tarjeta,
+                'card_number': numero_tarjeta,
+                'expiry_date': expiry_date,
+                'cvv': cvv
+            })
+            
+            
+        # Validar CVV (3 o 4 dígitos numéricos)
+        if not (cvv.isdigit() and len(cvv) in [3, 4]):
+            messages.error(request, "CVV inválido.")
+            context = {
+                "total_pago": monto,
+                "card_name": nombre_tarjeta,
+                "card_number": numero_tarjeta,
+                "expiry_date": expiry_date,
+                "cvv": cvv
+            }
+            return render(request, "pago.html", context)
+
+        metodo_pago = "Tarjeta"
+
+        # Procesar pago en MongoDB
+        try:
             db = conectar_mongo()
             if db is None:
                 messages.error(request, "No se pudo conectar a la base de datos MongoDB.")
@@ -438,42 +540,41 @@ def procesar_pago(request):
             carritos_collection = db["Carritos"]
             pagos_collection = db["Pagos"]
 
-            # Obtener el carrito del usuario
             carrito = carritos_collection.find_one({"user_id": user_id})
-            
             if not carrito or not carrito.get("productos"):
                 messages.error(request, "Tu carrito está vacío. No se puede procesar el pago.")
                 return redirect("carrito")
 
             productos = carrito["productos"]
 
-            # Registrar el pago en la colección "Pagos"
             pago = {
                 "user_id": user_id,
                 "monto": monto,
                 "productos": productos,
-                "fecha": datetime.now(),  # Fecha actual cuando se realiza el pago
+                "fecha": datetime.now(),
                 "metodo_pago": metodo_pago
             }
 
-            # Insertar el pago en la base de datos
             pago_id = pagos_collection.insert_one(pago).inserted_id
 
-            # Limpiar el carrito después del pago
             carritos_collection.update_one(
                 {"user_id": user_id},
-                {"$set": {"productos": []}}  # Vaciar el carrito
+                {"$set": {"productos": []}}
             )
 
             messages.success(request, "Pago procesado correctamente.")
-            return redirect("confirmacion_pago", pago_id=pago_id)  # Redirigir a una página de confirmación de pago
+            return redirect("confirmacion_pago", pago_id=pago_id)
 
         except Exception as e:
-            # Manejar el error y redirigir al usuario con un mensaje
             messages.error(request, f"Hubo un error al procesar el pago: {str(e)}")
-            return redirect("carrito") 
+            return redirect("carrito")
 
-    return render(request, "pago.html")
+    else:
+        # GET request: mostrar formulario vacío o con total si viene por GET
+        total = request.GET.get('total', '0')
+        context = {'total_pago': total}
+        return render(request, "pago.html", context)
+
 
 
 

@@ -561,3 +561,10 @@ input[type="date"] {
     color: #555;
     line-height: 1.6;
 }
+
+#cvv {
+    -webkit-text-security: disc; /* Para navegadores basados en WebKit (Chrome, Safari) */
+            /* Para compatibilidad futura   text-security: disc; */
+    font-family: sans-serif;     /* Asegura un estilo legible */
+    letter-spacing: 2px;         /* Mejora la visualización con puntos */
+}
