@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container">
     <h2 class="text-center mb-4">¡Pago Exitoso!</h2>
-    
+
     <div class="payment-summary">
         <h3>Detalles del Pago</h3>
         <div class="row">
@@ -18,7 +18,8 @@
                 <h4>Productos Comprados:</h4>
                 <ul>
                     {% for producto in pago.productos %}
-                        <li>{{ producto.name }} - ${{ producto.price|floatformat:2 }} (Cantidad: {{ producto.cantidad }})</li>
+                    <li>{{ producto.name }} - ${{ producto.price|floatformat:2 }} (Cantidad: {{ producto.cantidad }})
+                    </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -34,5 +35,12 @@
         <p>¡Gracias por tu compra!</p>
         <a href="{% url 'index' %}" class="btn btn-primary btn-lg">Volver al Inicio</a>
     </div>
+    <a href="{% url 'pago_realizado' pago_id=pago_id %}"
+        style="display: inline-block; padding: 10px 20px; background: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background 0.3s ease;"
+        onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='#007bff'">
+        Descargar factura en PDF
+    </a>
 </div>
+
+
 {% endblock %}

@@ -17,4 +17,9 @@ urlpatterns = [
     path('mis_pedidos/', views.mostrar_pedidos, name='mostrar_pedidos'),
     path('acerca_de_nosotros/', views.acerca_de_nosotros, name='acerca_de_nosotros'),
     path('preguntas_frecuentes/', views.preguntas_frecuentes, name='preguntas_frecuentes'),
+    path('categoria/<str:nombre_categoria>/', views.categoria, name='categoria'),
+	path('factura/generar/<str:pago_id>/', views.generar_factura, name='generar_factura'),
+    path('factura/<str:factura_id>/', views.mostrar_factura, name='mostrar_factura'),
+    path('factura/pdf/<str:factura_id>/', views.factura_pdf, name='factura_pdf'),
+    path('pago/factura/<str:pago_id>/', views.pago_realizado, name='pago_realizado'),
 ]

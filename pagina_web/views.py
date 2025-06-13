@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from django.views.generic import View, ListView, CreateView, DeleteView
 from pymongo import MongoClient
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -9,6 +8,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from bson import ObjectId
 from datetime import datetime, timedelta
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+import weasyprint
+from datetime import datetime, date
+from django.contrib import messages
+from django.shortcuts import redirect, render
+from weasyprint import HTML
+
 
 # Configuración de conexión a MongoDB
 def conectar_mongo():
@@ -41,6 +48,8 @@ def index(request):
 
     try:
         collection = obtener_coleccion(request, 'Productos')  # Especificamos la colección 'Productos'
+        categorias = collection.distinct("category")
+
         if isinstance(collection, JsonResponse):  # Si la conexión falló, devolvemos el error
             return collection
 
@@ -61,7 +70,7 @@ def index(request):
     
     
     # Pasar los productos al template
-    return render(request, 'index.html', {"productos": productos})
+    return render(request, 'index.html', {"productos": productos, "categorias": categorias})
 
 
 #Inicio de sesion
@@ -437,27 +446,6 @@ def validar_luhn(numero):
 
 
 #Vista para procesar el pago
-from datetime import datetime, date
-from django.contrib import messages
-from django.shortcuts import redirect, render
-
-def validar_luhn(numero):
-    numero = numero.replace(' ', '')
-    if not numero.isdigit():
-        return False
-    suma = 0
-    debe_duplicar = False
-    for digito in reversed(numero):
-        d = int(digito)
-        if debe_duplicar:
-            d *= 2
-            if d > 9:
-                d -= 9
-        suma += d
-        debe_duplicar = not debe_duplicar
-    return suma % 10 == 0
-
-
 def procesar_pago(request):
     if request.method == 'POST':
         user_id = str(request.user.id) if request.user.is_authenticated else None
@@ -552,7 +540,10 @@ def procesar_pago(request):
                 "monto": monto,
                 "productos": productos,
                 "fecha": datetime.now(),
-                "metodo_pago": metodo_pago
+                "metodo_pago": metodo_pago,
+                "nombre_tarjeta": nombre_tarjeta,
+                "numero_tarjeta": numero_tarjeta,
+                "expiry_date": expiry_date,
             }
 
             pago_id = pagos_collection.insert_one(pago).inserted_id
@@ -596,21 +587,22 @@ def confirmacion_pago(request, pago_id):
             # Calcular la fecha de envío (1 semana después de la fecha de pago)
             fecha_pago = pago["fecha"]
             fecha_envio = fecha_pago + timedelta(days=7)
-            
+
             # Convertir la fecha de envío a un formato legible
             fecha_envio_str = fecha_envio.strftime("%d de %B de %Y")
 
             return render(request, "confirmacion_pago.html", {
                 "pago": pago,
+                "pago_id": pago_id,  # <- Agregamos pago_id aquí
                 "fecha_envio": fecha_envio_str
             })
         else:
             return render(request, "error.html", {"mensaje": "Pago no encontrado."})
 
     except Exception as e:
-        # Manejar errores de la conexión o cualquier otro error
         messages.error(request, f"Error al obtener el pago: {str(e)}")
         return redirect("index")
+
         
         
 
@@ -640,16 +632,20 @@ def mostrar_pedidos(request):
             return render(request, 'mostrar_pedidos.html', {'pagos': []})
 
         # Agregar la fecha de envío a cada pago
-        for pago in pagos_list:
-            # Renombrar _id a pedido_id
-            pago["pedido_id"] = str(pago["_id"])  # Convertir ObjectId a string
-            
-            # Calcular la fecha estimada de envío
-            fecha_pago = pago["fecha"]
-            fecha_envio = fecha_pago + timedelta(days=7)  # Sumar 7 días para la fecha de envío
-            pago["fecha_envio"] = fecha_envio.strftime("%d de %B de %Y")  # Convertir a formato legible
+        pagos_limpios = []
 
-        return render(request, 'mostrar_pedidos.html', {'pagos': pagos_list})
+        for pago in pagos_list:
+            pago_limpio = {
+                "pedido_id": str(pago["_id"]),
+                "fecha": pago["fecha"],
+                "monto": pago["monto"],
+                "productos": pago["productos"],
+                "fecha_envio": (pago["fecha"] + timedelta(days=7)).strftime("%d de %B de %Y"),
+                "estado": pago.get("estado", "Sin especificar"),
+            }
+            pagos_limpios.append(pago_limpio)
+
+        return render(request, 'mostrar_pedidos.html', {'pagos': pagos_limpios})
 
     except Exception as e:
         # Manejar errores de la conexión o cualquier otro error
@@ -665,3 +661,156 @@ def acerca_de_nosotros(request):
 #Vista para mostrar FAQ
 def preguntas_frecuentes(request):
     return render(request, 'faq.html')
+
+#Categorizacion
+def categoria(request, nombre_categoria):
+    collection = obtener_coleccion(request, 'Productos')
+    productos = []
+    documentos = collection.find({"category": nombre_categoria})
+    for doc in documentos:
+        productos.append({
+            "id": str(doc.get("_id")),
+            "name": doc.get("name"),
+            "price": doc.get("price"),
+            "images": doc.get("images", [])
+        })
+    return render(request, 'categoria.html', {
+        "productos": productos,
+        "categoria": nombre_categoria
+    })
+
+def generar_factura(request, pago_id):
+    try:
+        db = conectar_mongo()
+        if db is None:
+            messages.error(request, "No se pudo conectar a la base de datos MongoDB.")
+            return redirect("index")
+
+        pagos_collection = db["Pagos"]
+        facturas_collection = db["Facturas"]
+
+        pago = pagos_collection.find_one({"_id": ObjectId(pago_id)})
+
+        if not pago:
+            messages.error(request, "Pago no encontrado.")
+            return redirect("index")
+
+        # Preparar datos de la factura
+        fecha_pago = pago["fecha"]
+        fecha_envio = fecha_pago + timedelta(days=7)
+
+        factura_data = {
+            "pago_id": pago["_id"],
+            "usuario_id": pago.get("usuario_id"),  # si tienes referencia a usuario
+            "productos": pago.get("productos", []),
+            "total": pago.get("total"),
+            "fecha_pago": fecha_pago,
+            "fecha_envio": fecha_envio,
+            "fecha_generacion": datetime.now(),
+        }
+
+        # Guardar la factura
+        factura_id = facturas_collection.insert_one(factura_data).inserted_id
+
+        # Redirigir a la vista de mostrar factura o descargar PDF
+        return redirect('mostrar_factura', factura_id=str(factura_id))
+
+    except Exception as e:
+        messages.error(request, f"Error al generar factura: {str(e)}")
+        return redirect("index")
+    
+    
+def mostrar_factura(request, factura_id):
+    try:
+        db = conectar_mongo()
+        if db is None:
+            messages.error(request, "No se pudo conectar a la base de datos MongoDB.")
+            return redirect("index")
+
+        facturas_collection = db["Facturas"]
+        factura = facturas_collection.find_one({"_id": ObjectId(factura_id)})
+
+        if not factura:
+            messages.error(request, "Factura no encontrada.")
+            return redirect("index")
+
+        return render(request, "factura.html", {
+            "factura": factura
+        })
+
+    except Exception as e:
+        messages.error(request, f"Error al mostrar factura: {str(e)}")
+        return redirect("index")
+    
+    
+def factura_pdf(request, factura_id):
+    try:
+        db = conectar_mongo()
+        if db is None:
+            messages.error(request, "No se pudo conectar a la base de datos MongoDB.")
+            return redirect("index")
+
+        facturas_collection = db["Facturas"]
+        factura = facturas_collection.find_one({"_id": ObjectId(factura_id)})
+
+        if not factura:
+            messages.error(request, "Factura no encontrada.")
+            return redirect("index")
+
+        html_string = render_to_string("factura.html", {"factura": factura})
+
+        pdf_file = weasyprint.HTML(string=html_string).write_pdf()
+
+        response = HttpResponse(pdf_file, content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="factura_{factura_id}.pdf"'
+
+        return response
+
+    except Exception as e:
+        messages.error(request, f"Error al generar PDF: {str(e)}")
+        return redirect("index")
+    
+    
+def pago_realizado(request, pago_id):
+    db = conectar_mongo()
+    pagos = db["Pagos"]
+    pago = pagos.find_one({"_id": ObjectId(pago_id)})
+    if not pago:
+        messages.error(request, "Pago no encontrado.")
+        return redirect("carrito")
+    
+    numero_tarjeta = pago.get('numero_tarjeta', '')
+    ultimos4 = numero_tarjeta[-4:] if len(numero_tarjeta) >= 4 else '****'
+    nombre_tarjeta = pago.get('nombre_tarjeta', 'Titular')
+
+    # Calcular subtotales y total
+    for prod in pago.get("productos", []):
+        try:
+            cantidad = float(prod.get("cantidad", 0))
+            precio = float(prod.get("price", 0))  # aquí price
+            prod["subtotal"] = cantidad * precio
+        except (ValueError, TypeError):
+            prod["subtotal"] = 0.0
+
+    pago["total"] = sum(p.get("subtotal", 0) for p in pago.get("productos", []))
+
+    # Pasa el _id como id para evitar problema con guion bajo
+    pago["id"] = str(pago["_id"])
+
+    # Fecha estimada envío
+    fecha_envio = pago["fecha"] + timedelta(days=7)
+
+    context = {
+        "factura": pago,
+        "fecha_envio": fecha_envio.strftime("%d de %B de %Y"),
+        'numero_tarjeta': numero_tarjeta,
+        'tarjeta_ultimos4': ultimos4,
+        'nombre_tarjeta': nombre_tarjeta,
+    }
+
+    html = render_to_string('factura.html', context)
+    pdf = HTML(string=html).write_pdf()
+
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment;filename=factura_{pago_id}.pdf'
+    return response
