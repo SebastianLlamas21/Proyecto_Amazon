@@ -41,7 +41,7 @@
 
         <div class="form-group">
             <label for="cvv">CVV</label>
-            <input type="text" class="cvv" name="cvv" id="cvv" placeholder="123" maxlength="4"  inputmode="numeric"
+            <input type="text" class="cvv" name="cvv" id="cvv" placeholder="123" maxlength="4" inputmode="numeric"
                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{ cvv|default_if_none:'' }}" required>
         </div>
 

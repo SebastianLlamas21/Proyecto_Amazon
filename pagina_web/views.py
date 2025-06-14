@@ -432,17 +432,39 @@ def validar_luhn(numero):
     numero = numero.replace(' ', '')
     if not numero.isdigit():
         return False
+
+    #Validar longitud
+    longitud = len(numero)
+    if longitud not in (13, 15, 16):
+        return False
+
+    #Verificar IIN (prefijo)
+    #Visa
+    if numero.startswith('4') and longitud in (13, 16):
+        pass
+    #Mastercard
+    elif longitud == 16 and 51 <= int(numero[:2]) <= 55:
+        pass
+    #American Express
+    elif longitud == 15 and (numero.startswith('34') or numero.startswith('37')):
+        pass
+    else:
+        return False
+
+    # 4) Algoritmo de Luhn
     suma = 0
     debe_duplicar = False
-    for digito in reversed(numero):
-        d = int(digito)
+    for d_char in reversed(numero):
+        d = int(d_char)
         if debe_duplicar:
             d *= 2
             if d > 9:
                 d -= 9
         suma += d
         debe_duplicar = not debe_duplicar
-    return suma % 10 == 0
+
+    return (suma % 10) == 0
+
 
 
 #Vista para procesar el pago
@@ -474,6 +496,11 @@ def procesar_pago(request):
             messages.error(request, "Monto inválido.")
             return render(request, 'pago.html', context)
 
+        # Validar longitud de la tarjeta (debe tener entre 13 y 16 dígitos)
+        if not numero_tarjeta.isdigit() or len(numero_tarjeta) not in [13, 15, 16]:
+            messages.error(request, "Número de tarjeta inválido. La tarjeta debe tener 13, 15 o 16 dígitos.")
+            return render(request, 'pago.html', context)
+        
         # Validar número tarjeta con Luhn
         if not validar_luhn(numero_tarjeta):
             messages.error(request, "Número de tarjeta inválido.")
@@ -701,7 +728,7 @@ def generar_factura(request, pago_id):
 
         factura_data = {
             "pago_id": pago["_id"],
-            "usuario_id": pago.get("usuario_id"),  # si tienes referencia a usuario
+            "usuario_id": pago.get("usuario_id"), 
             "productos": pago.get("productos", []),
             "total": pago.get("total"),
             "fecha_pago": fecha_pago,
